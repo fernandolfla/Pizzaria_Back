@@ -10,7 +10,7 @@ namespace Pizzaria_back.Controllers
     {
         private readonly IProdutoService _produtoServices;
 
-        public ProdutoController(IProdutoService produtoService)
+        public ProdutoController(IProdutoService produtoService)  //Construtor - Conhece a interface do ProdutoService, onde estão as verificações
         {
             _produtoServices = produtoService;
         }
