@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Repository;
@@ -12,13 +13,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options =>
+    {
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DB_POSTGRESQL"));
+    }
+);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

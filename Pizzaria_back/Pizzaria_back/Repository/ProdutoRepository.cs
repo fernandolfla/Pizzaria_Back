@@ -5,45 +5,38 @@ namespace Pizzaria_back.Repository
 {
     public class ProdutoRepository : IProdutoRepository
     {
-        private List<Produto> _produtos;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public ProdutoRepository()
+        public ProdutoRepository(ApplicationDbContext applicationDbContext)
         {
-            _produtos = new List<Produto>();
+            _applicationDbContext = applicationDbContext;
         }
 
         public void Atualizar(Produto produto)
         {
-            var produtoLista = _produtos.FirstOrDefault(x => x.Id == produto.Id);
-            if(produtoLista != null)
-            {
-                _produtos.Remove(produtoLista);
-                _produtos.Add(produto);
-            }
+            _applicationDbContext.Produtos.Update(produto);
+            _applicationDbContext.SaveChanges();
         }
 
         public List<Produto> Buscar()
-        {
-            return _produtos;
-        }
+            => _applicationDbContext.Produtos
+                                    .Where(x => x.Ativo)
+                                    .ToList();
 
         public Produto Buscar(int id)
-        {
-            return _produtos.FirstOrDefault(x => x.Id == id);
-        }
+            => _applicationDbContext.Produtos.First(x => x.Id == id);
 
         public void Deletar(int id)
         {
-            var produtoLista = _produtos.FirstOrDefault(x => x.Id == id);
-            if (produtoLista != null)
-            {
-                _produtos.Remove(produtoLista);
-            }
+            var produto = this.Buscar(id);
+            produto.Ativo = false;
+            this.Atualizar(produto);
         }
 
         public void Inserir(Produto produto)
         {
-            _produtos.Add(produto);
+            _applicationDbContext.Produtos.Add(produto);
+            _applicationDbContext.SaveChanges();
         }
     }
 }

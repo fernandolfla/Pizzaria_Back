@@ -1,4 +1,6 @@
-﻿namespace Pizzaria_back.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Pizzaria_back.Models
 {
     public class DbEntity
     {
