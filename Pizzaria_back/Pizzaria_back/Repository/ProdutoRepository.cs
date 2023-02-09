@@ -24,7 +24,7 @@ namespace Pizzaria_back.Repository
                                     .ToList();
 
         public Produto Buscar(int id)
-            => _applicationDbContext.Produtos.First(x => x.Id == id);
+            => _applicationDbContext.Produtos.First(x => x.Id == id && x.Ativo);
 
         public void Deletar(int id)
         {

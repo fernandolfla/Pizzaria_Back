@@ -17,25 +17,28 @@ namespace Pizzaria_back.Service
 
         public void Inserir(Produto produto)
         {
-            if (produto.Preco < 0)
-                throw new Exception("Digite o preço do produto");
+            if(_produtoRepository.Buscar(produto.Id) != null)
+                throw new BussinessException("Produto duplicado");
+
+            if (produto.Preco <= 0)
+                throw new BussinessException("Digite o preço do produto");
 
             if (string.IsNullOrEmpty(produto.Nome))
-                throw new Exception("Digite o nome do produto");
+                throw new BussinessException("Digite o nome do produto");
 
             _produtoRepository.Inserir(produto);
         }
 
         public void Atualizar(Produto produto)
         {
-            if (produto.Id < 0)
-                throw new Exception("Informe um produto valido");
+            if (produto.Id <= 0)
+                throw new BussinessException("Informe um produto valido");
 
-            if (produto.Preco < 0)
-                throw new Exception("Digite o preço do produto");
+            if (produto.Preco <= 0)
+                throw new BussinessException("Digite o preço do produto");
 
             if (string.IsNullOrEmpty(produto.Nome))
-                throw new Exception("Digite o nome do produto");
+                throw new BussinessException("Digite o nome do produto");
 
             _produtoRepository.Atualizar(produto);
         }
