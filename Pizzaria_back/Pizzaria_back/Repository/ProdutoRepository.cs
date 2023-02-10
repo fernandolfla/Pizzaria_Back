@@ -11,7 +11,11 @@ namespace Pizzaria_back.Repository
         {
             _applicationDbContext = applicationDbContext;
         }
-
+        public void Inserir(Produto produto)
+        {
+            _applicationDbContext.Produtos.Add(produto);
+            _applicationDbContext.SaveChanges();
+        }
         public void Atualizar(Produto produto)
         {
             _applicationDbContext.Produtos.Update(produto);
@@ -24,7 +28,7 @@ namespace Pizzaria_back.Repository
                                     .ToList();
 
         public Produto Buscar(int id)
-            => _applicationDbContext.Produtos.First(x => x.Id == id && x.Ativo);
+            => _applicationDbContext.Produtos.FirstOrDefault(x => x.Id == id && x.Ativo);
 
         public void Deletar(int id)
         {
@@ -33,10 +37,6 @@ namespace Pizzaria_back.Repository
             this.Atualizar(produto);
         }
 
-        public void Inserir(Produto produto)
-        {
-            _applicationDbContext.Produtos.Add(produto);
-            _applicationDbContext.SaveChanges();
-        }
+        
     }
 }

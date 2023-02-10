@@ -4,10 +4,10 @@ namespace Pizzaria_back.Interfaces.Service
 {
     public interface IProdutoService
     {
-        List<Produto> Buscar();
-        Produto Buscar(int id);
         void Inserir(Produto produto);
         void Atualizar(Produto produto);
+        List<Produto> Buscar();
+        Produto Buscar(int id);
         void Deletar(int id);
     }
 }

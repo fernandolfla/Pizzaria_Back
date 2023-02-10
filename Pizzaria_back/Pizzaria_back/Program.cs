@@ -3,8 +3,9 @@ using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Repository;
 using Pizzaria_back.Service;
+using System;
 
-    var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -22,12 +23,23 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options =>
-    {
-        options.UseNpgsql(builder.Configuration.GetConnectionString("DB_POSTGRESQL"));
-    }
-);
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+
+//builder.Services.AddDbContext<ApplicationDbContext>(
+//    options =>
+//    {
+//        //options.UseMySql(builder.Configuration.GetConnectionString("DB_POSTGRESQL"));
+
+//    }
+//);
+
+string mySqlConnection = builder.Configuration.GetConnectionString("DB_MySQL");
+
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+                options.UseMySql(mySqlConnection,
+                      ServerVersion.AutoDetect(mySqlConnection)));
+
 
 var app = builder.Build();
 

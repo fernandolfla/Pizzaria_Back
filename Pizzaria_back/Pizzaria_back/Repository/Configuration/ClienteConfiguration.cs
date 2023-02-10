@@ -5,21 +5,14 @@ using System.Reflection.Emit;
 
 namespace Pizzaria_back.Repository.Configuration
 {
-    public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
+    public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
     {
-        public void Configure(EntityTypeBuilder<Produto> builder)
+        public void Configure(EntityTypeBuilder<Cliente> builder)
         {
             builder.Property(x => x.Id).UseMySqlIdentityColumn();
 
             builder.Property(x => x.Nome).HasMaxLength(255)
                                          .IsRequired();
-
-            builder.Property(x => x.Preco).IsRequired();
-
-            builder.Property(x => x.Ativo).HasDefaultValue(true);
-
-            builder.Property(x => x.Imagem).HasMaxLength(255)
-                                           .IsRequired();
         }
     }
 }

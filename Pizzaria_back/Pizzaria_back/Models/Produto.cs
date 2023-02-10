@@ -7,6 +7,6 @@ namespace Pizzaria_back.Models
         public string Nome { get; set; } = string.Empty;
         public double Preco { get; set; }
         public string Imagem { get; set; } = string.Empty;
-        public bool Ativo { get; set; }
+        
     }
 }
