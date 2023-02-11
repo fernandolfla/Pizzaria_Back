@@ -11,7 +11,7 @@ using Pizzaria_back.Repository;
 namespace Pizzariaback.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230210172418_Inicial")]
+    [Migration("20230211220247_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
