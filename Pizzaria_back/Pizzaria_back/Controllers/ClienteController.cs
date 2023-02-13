@@ -34,7 +34,7 @@ namespace Pizzaria_back.Controllers
         public IActionResult Atualizar([FromBody] Cliente cliente)
         {
             _clienteServices.Atualizar(cliente);
-            return Ok(cliente);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

@@ -23,7 +23,7 @@ namespace Pizzaria_back.Repository
             _applicationDbContext.SaveChanges();
         }
         public List<Cliente> Buscar() 
-        => _applicationDbContext.Clientes    
+        => _applicationDbContext.Clientes
                         .Where(x => x.Ativo)
                         .ToList();
 
