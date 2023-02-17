@@ -30,13 +30,16 @@ namespace Pizzaria_back.Service
         public Cliente Buscar(int id)
         => _clienteRepository.Buscar(id);
 
+        public Cliente Buscar(string email)
+        => _clienteRepository.Buscar(email);
+
         public void Deletar(int id)
         => _clienteRepository.Deletar(id);
 
 
         private bool CheckCliente(Cliente cliente)
         {
-            ClientValidator validations = new ClientValidator();
+            ClientValidator validations = new ClientValidator(_clienteRepository);
             var validationResult = validations.Validate(cliente);
             if (!validationResult.IsValid)
             {

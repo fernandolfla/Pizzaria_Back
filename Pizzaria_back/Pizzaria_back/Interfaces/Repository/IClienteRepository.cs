@@ -8,6 +8,7 @@ namespace Pizzaria_back.Interfaces.Repository
         void Atualizar(Cliente cliente);
         List<Cliente> Buscar();
         Cliente Buscar(int id);
+        Cliente Buscar(string email);
         void Deletar(int id);
     }
 
