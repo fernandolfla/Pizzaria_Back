@@ -14,20 +14,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Open Project Folder
-      run: |
-            cd Pizzaria_back
-            ls
     - name: Restore dependencies
-      run: |
-            ls
-            dotnet restore
+      run: dotnet restore .\Pizzaria_back\Pizzaria_back.sln
     - name: Build
-      run: dotnet build -c Release
+      run: dotnet build .\Pizzaria_back\Pizzaria_back.sln -c Release 
     - name: Test
-      run: dotnet test 
+      run: dotnet test .\Pizzaria_back\Pizzaria_back.sln
     - name: Publish
-      run: dotnet pubish -c Release     
+      run: dotnet pubish .\Pizzaria_back\Pizzaria_back.sln -c Release     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
