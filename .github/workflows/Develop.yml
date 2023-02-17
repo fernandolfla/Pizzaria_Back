@@ -17,11 +17,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./Pizzaria_back/Pizzaria_back.sln
     - name: Build
-      run: dotnet build .\Pizzaria_back\Pizzaria_back.sln -c Release 
+      run: dotnet build ./Pizzaria_back/Pizzaria_back.sln -c Release 
     - name: Test
-      run: dotnet test .\Pizzaria_back\Pizzaria_back.sln
+      run: dotnet test ./Pizzaria_back/Pizzaria_back.sln
     - name: Publish
-      run: dotnet pubish .\Pizzaria_back\Pizzaria_back.sln -c Release     
+      run: dotnet pubish ./Pizzaria_back/Pizzaria_back.sln -c Release     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
