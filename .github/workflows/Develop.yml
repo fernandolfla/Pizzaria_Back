@@ -15,7 +15,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore .\Pizzaria_back\Pizzaria_back.sln
+      run: dotnet restore ./Pizzaria_back/Pizzaria_back.sln
     - name: Build
       run: dotnet build .\Pizzaria_back\Pizzaria_back.sln -c Release 
     - name: Test
