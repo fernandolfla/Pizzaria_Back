@@ -23,7 +23,7 @@ jobs:
     - name: Publish
       run: dotnet publish ./Pizzaria_back/Pizzaria_back.sln -c Release     
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
