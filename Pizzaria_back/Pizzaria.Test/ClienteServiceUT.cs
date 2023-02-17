@@ -51,9 +51,9 @@ namespace Pizzaria.Test
             {
                 Id = 1,
                 Ativo = true,
-                Nome = "Fernandinho",
+                Nome = "Fernandinho", 
                 Telefone = "41988165786",
-                Email = "fer@fer.com",
+                Email = "fer@fer.com",  
 
             };
 
@@ -62,7 +62,7 @@ namespace Pizzaria.Test
             //Assert
             Assert.Throws<BussinessException>(() => _clienteService.Inserir(cliente));
 
-
+            
         }
 
 
