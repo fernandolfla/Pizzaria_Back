@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EB4C50AE-561
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3585B2D3-080A-421E-B43F-9FFC43A1D493}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{94651BE8-685F-4CCA-89AF-94C911A56DFC}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\Develop.yml = ..\.github\workflows\Develop.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
