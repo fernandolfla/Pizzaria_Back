@@ -1,7 +1,7 @@
 on: 
   push: 
     branches:
-     - Develop 
+     - Bugfix/UpdateClient
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
