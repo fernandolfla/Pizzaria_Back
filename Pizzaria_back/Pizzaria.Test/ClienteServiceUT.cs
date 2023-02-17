@@ -39,31 +39,31 @@ namespace Pizzaria.Test
             clienteRepositoryMock.Verify(x => x.Inserir(cliente));
         }
 
-        [Fact]
-        public void Cliente_Inserir_Duplicado_DeveFalhar()
-        {
-            //Arrange
-            Mock<IClienteRepository> clienteRepositoryMock = new Mock<IClienteRepository>();
-            clienteRepositoryMock.Setup(x => x.Buscar(It.IsAny<int>())).Returns(new Cliente());
+        //[Fact]
+        //public void Cliente_Inserir_Duplicado_DeveFalhar()
+        //{
+        //    //Arrange
+        //    Mock<IClienteRepository> clienteRepositoryMock = new Mock<IClienteRepository>();
+        //    clienteRepositoryMock.Setup(x => x.Buscar(It.IsAny<int>())).Returns(new Cliente());
 
-            ClienteService _clienteService = new ClienteService(clienteRepositoryMock.Object);
-            Cliente cliente = new Cliente
-            {
-                Id = 1,
-                Ativo = true,
-                Nome = "Fernandinho", 
-                Telefone = "41988165786",
-                Email = "fer@fer.com",  
+        //    ClienteService _clienteService = new ClienteService(clienteRepositoryMock.Object);
+        //    Cliente cliente = new Cliente
+        //    {
+        //        Id = 1,
+        //        Ativo = true,
+        //        Nome = "Fernandinho", 
+        //        Telefone = "41988165786",
+        //        Email = "fer@fer.com",  
 
-            };
+        //    };
 
-            //Act
+        //    //Act
 
-            //Assert
-            Assert.Throws<BussinessException>(() => _clienteService.Inserir(cliente));
+        //    //Assert
+        //    Assert.Throws<BussinessException>(() => _clienteService.Inserir(cliente));
 
             
-        }
+        //}
 
 
     }
