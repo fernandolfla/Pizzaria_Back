@@ -1,0 +1,35 @@
+on: 
+  push: 
+    branches:
+     - Develop
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build -c Release
+    - name: Test
+      run: dotnet test 
+    - name: Publish
+      run: dotnet pubish -c Release     
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.ftp_password }}
+        server-dir: /wwwroot/apidev
+        local-dir: /Pizzaria_back/bin/Release/net6.0/publish
+      
+  
+
