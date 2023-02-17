@@ -23,13 +23,17 @@ namespace Pizzaria_back.Repository
             _applicationDbContext.SaveChanges();
         }
         public List<Cliente> Buscar() 
-        => _applicationDbContext.Clientes    
+        => _applicationDbContext.Clientes
                         .Where(x => x.Ativo)
                         .ToList();
 
         public Cliente Buscar(int Id) 
             => _applicationDbContext.Clientes
                          .FirstOrDefault(x => x.Id == Id);
+
+        public Cliente Buscar(string email)  //cliente não podem ter o mesmo e-mail cadastrado 
+            => _applicationDbContext.Clientes
+                         .FirstOrDefault(x => x.Email.Equals(email));
 
         public void Deletar(int id) 
         {

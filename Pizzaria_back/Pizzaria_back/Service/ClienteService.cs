@@ -1,6 +1,7 @@
 ﻿using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Models;
+using Pizzaria_back.Validators;
 
 namespace Pizzaria_back.Service
 {
@@ -15,13 +16,13 @@ namespace Pizzaria_back.Service
 
         public void Inserir(Cliente cliente)
         {
-            CheckCliente(cliente);
-            _clienteRepository.Inserir(cliente);
+            if(CheckCliente(cliente))
+                _clienteRepository.Inserir(cliente);
         }
         public void Atualizar(Cliente cliente)
         {
-            CheckCliente(cliente);
-            _clienteRepository.Atualizar(cliente);
+            if (CheckCliente(cliente))
+                _clienteRepository.Atualizar(cliente);
         }
         public List<Cliente> Buscar()
           =>  _clienteRepository.Buscar();
@@ -29,21 +30,24 @@ namespace Pizzaria_back.Service
         public Cliente Buscar(int id)
         => _clienteRepository.Buscar(id);
 
+        public Cliente Buscar(string email)
+        => _clienteRepository.Buscar(email);
+
         public void Deletar(int id)
         => _clienteRepository.Deletar(id);
 
 
-        private void CheckCliente(Cliente cliente)
+        private bool CheckCliente(Cliente cliente)
         {
-            if (string.IsNullOrEmpty(cliente.Nome))
-                throw new BussinessException("Digite um nome para este cliente");
+            ClientValidator validations = new ClientValidator(_clienteRepository);
+            var validationResult = validations.Validate(cliente);
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
+                throw new BussinessException(errors);
+            }
 
-            if (cliente.Nome.Length < 3)
-                throw new BussinessException("O nome deve conter no mínimo 3 letras");
-
-            if (string.IsNullOrEmpty(cliente.Telefone))
-                throw new BussinessException("Digite um Telefone Válido");
-     
+            return true;
         }
     }
 }
