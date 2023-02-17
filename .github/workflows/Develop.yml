@@ -19,7 +19,9 @@ jobs:
             cd Pizzaria_back
             ls
     - name: Restore dependencies
-      run: dotnet restore
+      run: |
+            ls
+            dotnet restore
     - name: Build
       run: dotnet build -c Release
     - name: Test
