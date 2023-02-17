@@ -19,3 +19,4 @@ MySql                                             5.7.32-35
 
 Software web para acesso ao banco e comunicação com várias possibilidades de front
 Esta api visa proporcionar todo backend necessário para o funcionamento do seu front (web) ou (mobile)
+
