@@ -20,10 +20,18 @@ builder.Services.AddSwaggerGen();
 //Services AddScoped objeto instanciado até a finalização do método 
 //Services AddAddTransient  toda vez que o controlador é instanciado, será gerado uma nova instância do objeto em dependencia
 */
+//Injeção de dependencias para acesso ao repositório
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-builder.Services.AddScoped<IProdutoService, ProdutoService>();
-
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<ITipoRepository, TipoRepository>();
+builder.Services.AddScoped<ITamanhoRepository, TamanhoRepository>();
+builder.Services.AddScoped<ISaborRepository, SaborRepository>();
+builder.Services.AddScoped<ITipo_TamanhoRepository, Tipo_TamanhoRepository>();
+
+
+
+//Injeção de dependências para acesso aos serviços / regras de negócio
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
 //builder.Services.AddDbContext<ApplicationDbContext>(
