@@ -13,3 +13,4 @@ Telas
 -- Melhorias futuras
 Log da aplicação 
 Necessidade de cash 
+
