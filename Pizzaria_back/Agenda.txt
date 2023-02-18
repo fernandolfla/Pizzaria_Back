@@ -1,0 +1,15 @@
+Middler de respostas e comunicação para tratar erros excessões 
+
+Autenticação dos usuários
+
+
+Telas 
+	{
+
+
+	}
+
+
+-- Melhorias futuras
+Log da aplicação 
+Necessidade de cash 
