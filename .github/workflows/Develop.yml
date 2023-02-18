@@ -25,9 +25,9 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: ftps://marte.hostingzone.com.br
+        server: marte.hostingzone.com.br
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /wwwroot/apidev/
         local-dir: ./Pizzaria_back/Pizzaria_back/bin/Release/net6.0/publish/
-        protocol: ftps
+        protocol: ftp
