@@ -27,12 +27,18 @@ builder.Services.AddScoped<ITipoRepository, TipoRepository>();
 builder.Services.AddScoped<ITamanhoRepository, TamanhoRepository>();
 builder.Services.AddScoped<ISaborRepository, SaborRepository>();
 builder.Services.AddScoped<ITipo_TamanhoRepository, Tipo_TamanhoRepository>();
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 
 
 //Injeção de dependências para acesso aos serviços / regras de negócio
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<ITipoService, TipoService>();
+builder.Services.AddScoped<ITamanhoService, TamanhoService>();
+builder.Services.AddScoped<ISaborService, SaborService>();
+builder.Services.AddScoped<ITipo_TamanhoService, Tipo_TamanhoService>();
+builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
 //builder.Services.AddDbContext<ApplicationDbContext>(
 //    options =>

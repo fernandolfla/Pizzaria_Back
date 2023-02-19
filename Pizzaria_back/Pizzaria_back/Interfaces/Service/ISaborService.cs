@@ -1,6 +1,8 @@
-﻿namespace Pizzaria_back.Interfaces.Service
+﻿using Pizzaria_back.Models;
+
+namespace Pizzaria_back.Interfaces.Service
 {
-    public interface ISaborService
+    public interface ISaborService : IBaseService<Sabor>
     {
     }
 }

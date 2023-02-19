@@ -1,6 +1,8 @@
-﻿namespace Pizzaria_back.Interfaces.Repository
+﻿using Pizzaria_back.Models;
+
+namespace Pizzaria_back.Interfaces.Repository
 {
-    public interface ITipoRepository
+    public interface ITipoRepository : IBaseRepository<Tipo>
     {
 
     }
