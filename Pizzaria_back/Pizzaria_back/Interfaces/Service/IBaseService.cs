@@ -7,5 +7,6 @@
         void Deletar(int id);
         List<T> Buscar();
         T Buscar(int id);
+        bool Validar(T objeto);
     }
 }

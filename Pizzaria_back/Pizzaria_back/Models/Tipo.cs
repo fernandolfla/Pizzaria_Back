@@ -6,6 +6,6 @@ namespace Pizzaria_back.Models
     {
         public string Nome { get; set; } = string.Empty;
         public int ProdutoId { get; set;}
-        public Produto Produto; 
+        public Produto Produto;// { get; set; } verificar com fagner a questão do migration
     }
 }

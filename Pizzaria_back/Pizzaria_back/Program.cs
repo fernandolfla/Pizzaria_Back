@@ -1,9 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Pizzaria_back.Interfaces.Repository;
-using Pizzaria_back.Interfaces.Service;
+using Pizzaria_back;
 using Pizzaria_back.Repository;
-using Pizzaria_back.Service;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,46 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-/*
-// **** Injeção de dependência ****
-//Services AddSingleton sempre que o controller for instanciado, meu objeto será instanciado até a finalização da aplicação para TODOS os usuários da aplicação
-//Services AddScoped objeto instanciado até a finalização do método 
-//Services AddAddTransient  toda vez que o controlador é instanciado, será gerado uma nova instância do objeto em dependencia
-*/
-//Injeção de dependencias para acesso ao repositório
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-builder.Services.AddScoped<ITipoRepository, TipoRepository>();
-builder.Services.AddScoped<ITamanhoRepository, TamanhoRepository>();
-builder.Services.AddScoped<ISaborRepository, SaborRepository>();
-builder.Services.AddScoped<ITipo_TamanhoRepository, Tipo_TamanhoRepository>();
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-
-
-
-//Injeção de dependências para acesso aos serviços / regras de negócio
-builder.Services.AddScoped<IProdutoService, ProdutoService>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
-builder.Services.AddScoped<ITipoService, TipoService>();
-builder.Services.AddScoped<ITamanhoService, TamanhoService>();
-builder.Services.AddScoped<ISaborService, SaborService>();
-builder.Services.AddScoped<ITipo_TamanhoService, Tipo_TamanhoService>();
-builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-
-//builder.Services.AddDbContext<ApplicationDbContext>(
-//    options =>
-//    {
-//        //options.UseMySql(builder.Configuration.GetConnectionString("DB_POSTGRESQL"));
-
-//    }
-//);
-
-string mySqlConnection = builder.Configuration.GetConnectionString("DB_MySQL");
+string mySqlConnection = builder.Configuration.GetConnectionString("DB_MySQL");  //Endereço do banco de dados
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
                 options.UseMySql(mySqlConnection,
                       ServerVersion.AutoDetect(mySqlConnection)));
 
+Startup.ConfigureServices(builder.Services);  //Injeção de dependencias da classe Startup
 
 var app = builder.Build();
 
@@ -64,7 +28,7 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); 
 
 app.UseAuthorization();
 
