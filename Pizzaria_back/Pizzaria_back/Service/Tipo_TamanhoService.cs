@@ -19,9 +19,9 @@ namespace Pizzaria_back.Service
             _tamanhoRepository = tamanhoRepository;
         }
 
-        public override bool Validar(Tipo_Tamanho objeto)
+        public override bool ValidarInserir(Tipo_Tamanho objeto)
         {
-            Tipo_TamanhoValidator validations = new Tipo_TamanhoValidator(_tipo_TamanhoRepository, _tamanhoRepository,_tipoRepository);
+            Tipo_TamanhoInserirValidator validations = new Tipo_TamanhoInserirValidator(_tipo_TamanhoRepository, _tamanhoRepository,_tipoRepository);
             var validationResult = validations.Validate(objeto);
             if (!validationResult.IsValid)
             {
@@ -30,5 +30,18 @@ namespace Pizzaria_back.Service
             }
             return true;
         }
+        public override bool ValidarAtualizar(Tipo_Tamanho objeto)
+        {
+            Tipo_TamanhoAtualizarValidator validations = new Tipo_TamanhoAtualizarValidator(_tipo_TamanhoRepository);
+            var validationResult = validations.Validate(objeto);
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
+                throw new BussinessException(errors);
+            }
+            return true;
+        }
+
+
     }
 }

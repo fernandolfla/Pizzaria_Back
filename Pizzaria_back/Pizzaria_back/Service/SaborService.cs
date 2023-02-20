@@ -14,9 +14,20 @@ namespace Pizzaria_back.Service
             _repository = repository;
         }
 
-        public override bool Validar(Sabor objeto)
+        public override bool ValidarInserir(Sabor objeto)
         {
-            SaborValidator validations = new SaborValidator(_repository);
+            SaborInserirValidator validations = new SaborInserirValidator(_repository);
+            var validationResult = validations.Validate(objeto);
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
+                throw new BussinessException(errors);
+            }
+            return true;
+        }
+        public override bool ValidarAtualizar(Sabor objeto)
+        {
+            SaborAtualizarValidator validations = new SaborAtualizarValidator(_repository);
             var validationResult = validations.Validate(objeto);
             if (!validationResult.IsValid)
             {

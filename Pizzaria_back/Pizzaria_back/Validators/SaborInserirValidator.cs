@@ -9,9 +9,9 @@ namespace Pizzaria_back.Validators
         São ligados ao tipo pois cada Tipo dita o preço de vários sabores
         Exemplo de sabores: Muzzarela, Calabresa....
      */
-    public class SaborValidator :AbstractValidator<Sabor>
+    public class SaborInserirValidator : AbstractValidator<Sabor>
     {
-        public SaborValidator(ISaborRepository repository)
+        public SaborInserirValidator(ISaborRepository repository)
         {
             RuleFor(x => x.Nome).NotEmpty()
                             .NotNull().WithMessage("Sabor precisa ter seu nome especificado")

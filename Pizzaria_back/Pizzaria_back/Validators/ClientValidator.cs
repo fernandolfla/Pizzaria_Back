@@ -27,7 +27,7 @@ namespace Pizzaria_back.Validators
             RuleFor(x => x)
                 .Custom((x, context) =>
                 {
-                    this.email = x.Email;
+                    email = x.Email;
                 });
 
             if (!string.IsNullOrEmpty(email))
@@ -37,6 +37,6 @@ namespace Pizzaria_back.Validators
 
         }
 
-       
+
     }
 }

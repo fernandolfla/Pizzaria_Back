@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string mySqlConnection = builder.Configuration.GetConnectionString("DB_MySQL");  //Endereço do banco de dados
+string? mySqlConnection = builder.Configuration.GetConnectionString("DB_MySQL");  //Endereço do banco de dados
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
                 options.UseMySql(mySqlConnection,

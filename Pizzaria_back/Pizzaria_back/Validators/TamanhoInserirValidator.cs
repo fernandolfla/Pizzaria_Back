@@ -11,9 +11,9 @@ namespace Pizzaria_back.Validators
         Tamanhos não são ligados a um produto, então podem ser cadastrados todos de uma vez
         Tamanhos serão ligados ao preço em Tipo_Tamanhos
      */
-    public class TamanhoValidator :AbstractValidator<Tamanho>
+    public class TamanhoInserirValidator : AbstractValidator<Tamanho>
     {
-        public TamanhoValidator(ITamanhoRepository repository) 
+        public TamanhoInserirValidator(ITamanhoRepository repository)
         {
             RuleFor(x => x.Nome).NotEmpty()
                              .NotNull().WithMessage("Tamanho precisa ter seu nome especificado")

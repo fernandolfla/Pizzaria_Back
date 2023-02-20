@@ -6,7 +6,9 @@
         void Atualizar(T objeto);
         void Deletar(int id);
         List<T> Buscar();
-        T Buscar(int id);
-        bool Validar(T objeto);
+        T? Buscar(int id);
+        bool ValidarInserir(T objeto);
+        bool ValidarAtualizar(T objeto);
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using Pizzaria_back.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Pizzaria_back.Models;
 
 namespace Pizzaria_back.Repository
 {
@@ -18,7 +19,7 @@ namespace Pizzaria_back.Repository
         }
         public void Atualizar(T objeto)
         {
-            _applicationDbContext.Update(objeto);
+            _applicationDbContext.Update(objeto);//Não funcional
             _applicationDbContext.SaveChanges();
         }
 
@@ -37,8 +38,9 @@ namespace Pizzaria_back.Repository
                                     .Where(x => x.Ativo)
                                     .ToList();
         public T? Buscar(int id)
-            => _applicationDbContext.Set<T>()
-                                    .Find(id);
+           => _applicationDbContext.Set<T>()
+                .Where(x => x.Id == id && x.Ativo == true)
+                .FirstOrDefault();
 
     }
 }

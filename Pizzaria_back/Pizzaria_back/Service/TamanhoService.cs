@@ -16,9 +16,21 @@ namespace Pizzaria_back.Service
         }
 
 
-        public override bool Validar(Tamanho objeto)
+        public override bool ValidarInserir(Tamanho objeto)
         {
-            TamanhoValidator validations = new TamanhoValidator(_repository);
+            TamanhoInserirValidator validations = new TamanhoInserirValidator(_repository);
+            var validationResult = validations.Validate(objeto);
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
+                throw new BussinessException(errors);
+            }
+            return true;
+        }
+
+        public override bool ValidarAtualizar(Tamanho objeto)
+        {
+            TamanhoAtualizarValidator validations = new TamanhoAtualizarValidator(_repository);
             var validationResult = validations.Validate(objeto);
             if (!validationResult.IsValid)
             {
