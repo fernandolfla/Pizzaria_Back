@@ -30,7 +30,7 @@ namespace Pizzaria_back.Service
         public List<T> Buscar()
           => _baseRepository.Buscar();
 
-        public T Buscar(int id)
+        public T? Buscar(int id)
         => _baseRepository.Buscar(id);
 
         public virtual bool ValidarInserir(T objeto) //Cada método sobrescreve seu validar

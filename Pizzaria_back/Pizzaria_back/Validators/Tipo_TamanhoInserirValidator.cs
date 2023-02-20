@@ -22,7 +22,7 @@ namespace Pizzaria_back.Validators
 
             RuleFor(x => x.Preco).NotEmpty().WithMessage("Defina um preço para o produto");
 
-            RuleFor(x => x.Preco).LessThan(0).WithMessage("Preço não pode ser negativo");
+            RuleFor(x => x.Preco).GreaterThanOrEqualTo(0).WithMessage("Preço não pode ser negativo");
 
             RuleFor(x => x)
              .Must((x) =>

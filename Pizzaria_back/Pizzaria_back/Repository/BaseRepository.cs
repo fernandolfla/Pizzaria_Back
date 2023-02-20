@@ -19,8 +19,12 @@ namespace Pizzaria_back.Repository
         }
         public void Atualizar(T objeto)
         {
-            _applicationDbContext.Update(objeto);//Não funcional
-            _applicationDbContext.SaveChanges();
+            var existingObj = _applicationDbContext.Set<T>().Find(objeto.Id);
+            if (existingObj != null)
+            {
+                _applicationDbContext.Entry(existingObj).CurrentValues.SetValues(objeto);
+                _applicationDbContext.SaveChanges();
+            }
         }
 
         public void Deletar(int id)
