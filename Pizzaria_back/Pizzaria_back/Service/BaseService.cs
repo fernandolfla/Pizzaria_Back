@@ -13,13 +13,13 @@ namespace Pizzaria_back.Service
 
         public void Inserir(T objeto)
         {
-            if(ValidarInserir(objeto))
+            if(Validar(objeto))
                 _baseRepository.Inserir(objeto);
         }
 
         public void Atualizar(T objeto)
         {
-            if (ValidarAtualizar(objeto))
+            if (Validar(objeto))
                 _baseRepository.Atualizar(objeto);
         }
         public void Deletar(int id)
@@ -33,12 +33,8 @@ namespace Pizzaria_back.Service
         public T? Buscar(int id)
         => _baseRepository.Buscar(id);
 
-        public virtual bool ValidarInserir(T objeto) //Cada método sobrescreve seu validar
+        public virtual bool Validar(T objeto) //Cada método sobrescreve seu validar
         => true;
-
-        public virtual bool ValidarAtualizar(T objeto)
-        => true;
-
 
 
     }

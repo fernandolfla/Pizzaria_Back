@@ -4,6 +4,6 @@
     {
         public string Nome { get; set; }
         public int TipoId { get; set; }
-        public Tipo Tipo;
+        public Tipo Tipo { get; set; }
     }
 }

@@ -11,9 +11,9 @@ namespace Pizzaria_back.Validators
         Tipo_Tamanho não pode ter o mesmo Tipo e Mesmo Tamanho duplicado cadastrados
         Não precisa verificar por produto, somente por tipo/tamanho, pois o segundo produto cadastrado terá tipos com ID novos
      */
-    public class Tipo_TamanhoInserirValidator : AbstractValidator<Tipo_Tamanho>
+    public class Tipo_TamanhoValidator : AbstractValidator<Tipo_Tamanho>
     {
-        public Tipo_TamanhoInserirValidator(ITipo_TamanhoRepository tipo_TamanhoRepository, ITamanhoRepository tamanhoRepository, ITipoRepository tipoRepository)
+        public Tipo_TamanhoValidator(ITipo_TamanhoRepository tipo_TamanhoRepository, ITamanhoRepository tamanhoRepository, ITipoRepository tipoRepository)
         {
 
             RuleFor(x => x.TipoId).NotEmpty().WithMessage("Para cadastrar um preço ao produto fracionado é necessário um Tipo");

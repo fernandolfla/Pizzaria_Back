@@ -16,9 +16,9 @@ namespace Pizzaria_back.Service
             _tipoRepository = tiporepository;
         }
 
-        public override bool ValidarInserir(Tipo objeto)
+        public override bool Validar(Tipo objeto)
         {
-            TipoInserirValidator validations = new TipoInserirValidator(_produtoRepository);
+            TipoValidator validations = new TipoValidator(_produtoRepository);
             var validationResult = validations.Validate(objeto);
             if (!validationResult.IsValid)
             {
@@ -27,17 +27,7 @@ namespace Pizzaria_back.Service
             }
             return true;
         }
-        public override bool ValidarAtualizar(Tipo objeto)
-        {
-            TipoAtualizarValidator validations = new TipoAtualizarValidator(_tipoRepository);
-            var validationResult = validations.Validate(objeto);
-            if (!validationResult.IsValid)
-            {
-                var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
-                throw new BussinessException(errors);
-            }
-            return true;
-        }
+
 
 
     }

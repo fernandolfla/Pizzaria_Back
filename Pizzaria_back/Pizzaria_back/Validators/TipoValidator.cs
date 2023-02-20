@@ -9,9 +9,9 @@ namespace Pizzaria_back.Validators
      Pode haver quantos tipos quiser por produto, todo produto fracionado pode ter tipos
      Exemplos de tipos: Tradicional, Especial, Gourmet, Doces
     */
-    public class TipoInserirValidator : AbstractValidator<Tipo>
+    public class TipoValidator : AbstractValidator<Tipo>
     {
-        public TipoInserirValidator(IProdutoRepository repository)
+        public TipoValidator(IProdutoRepository repository)
         {
             RuleFor(x => x.ProdutoId).NotEmpty().WithMessage("Um produto válido é necessário para cadastrar um tipo");
 
