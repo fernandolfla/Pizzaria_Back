@@ -7,13 +7,15 @@ namespace Pizzaria_back.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoController : ControllerBase
+    public partial class TipoController : ControllerBase
     {
         private readonly ITipoService _service;
+        private readonly ISaborService _saborService;
 
-        public TipoController(ITipoService service)
+        public TipoController(ITipoService service, ISaborService saborService)
         {
             _service = service;
+            _saborService = saborService;
         }
 
         [HttpPost]

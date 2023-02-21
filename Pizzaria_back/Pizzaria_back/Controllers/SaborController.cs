@@ -1,45 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pizzaria_back.Interfaces.Service;
+using Pizzaria_back.Controllers.Model.Request;
+using Pizzaria_back.Controllers.Model.Response;
 using Pizzaria_back.Models;
 
 namespace Pizzaria_back.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SaborController : ControllerBase
+    public partial class TipoController : ControllerBase
     {
-        private readonly ISaborService _service;
 
-        public SaborController(ISaborService service) 
+        [HttpPost("{id}/Sabor")]
+        public IActionResult InserirSabor(int id, [FromBody] SaborRequest objeto)
         {
-            _service = service;
-        }
-
-        [HttpPost]
-        public IActionResult Inserir([FromBody] Sabor objeto)
-        {
-            _service.Inserir(objeto);
+            _saborService.Inserir(objeto);
             return Ok();
         }
 
-        [HttpPut]
-        public IActionResult Atualizar([FromBody] Sabor objeto)
+        [HttpPut("{id}/Sabor")]
+        public IActionResult AtualizarSabor(int id, [FromBody] Sabor objeto)
         {
-            _service.Atualizar(objeto);
+            _saborService.Atualizar(objeto);
             return Ok();
         }
-        [HttpGet]
-        public IActionResult Buscar()
-          => Ok(_service.Buscar());
-
-        [HttpGet("{id}")]
-        public IActionResult Buscar(int id)
-            => Ok(_service.Buscar(id));
-
-        [HttpDelete("{id}")]
-        public IActionResult Deletar(int id)
+        [HttpGet("{id}/Sabor")]
+        public IActionResult BuscarSabor(int id)
         {
-            _service.Deletar(id);
+            return Ok(_saborService.Buscar().Select(x => (SaborResponse)x));
+        }
+
+        [HttpDelete("{id}/Sabor/{idSabor}")]
+        public IActionResult DeletarSabor(int idSabor)
+        {
+            _saborService.Deletar(idSabor);
             return Ok();
         }
     }

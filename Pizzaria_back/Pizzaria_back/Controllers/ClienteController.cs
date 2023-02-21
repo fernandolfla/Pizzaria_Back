@@ -19,10 +19,6 @@ namespace Pizzaria_back.Controllers
         public IActionResult Buscar()
             => Ok(_clienteServices.Buscar());
 
-        [HttpGet("{id}")]
-        public IActionResult Buscar(int id)
-            => Ok(_clienteServices.Buscar(id));
-
         [HttpPost]
         public IActionResult Inserir([FromBody] Cliente cliente)
         {
