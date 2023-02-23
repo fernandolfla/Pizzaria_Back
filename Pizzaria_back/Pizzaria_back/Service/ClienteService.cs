@@ -21,21 +21,24 @@ namespace Pizzaria_back.Service
         }
         public void Atualizar(Cliente cliente)
         {
-            if (CheckCliente(cliente))
+            if (CheckCliente(cliente) && ClienteExists(cliente.Id))
                 _clienteRepository.Atualizar(cliente);
         }
         public List<Cliente> Buscar()
           =>  _clienteRepository.Buscar();
 
-        public Cliente Buscar(int id)
-        => _clienteRepository.Buscar(id);
+        public Cliente Buscar(int id) {
+           if(ClienteExists(id)) return _clienteRepository.Buscar(id);
+           else return null; 
+        } 
 
         public Cliente Buscar(string email)
         => _clienteRepository.Buscar(email);
 
         public void Deletar(int id)
-        => _clienteRepository.Deletar(id);
-
+        {
+            if(ClienteExists(id)) _clienteRepository.Deletar(id);
+        } 
 
         private bool CheckCliente(Cliente cliente)
         {
@@ -48,6 +51,13 @@ namespace Pizzaria_back.Service
             }
 
             return true;
+        }
+
+        private bool ClienteExists(int id) 
+        {
+            var cliente = _clienteRepository.Buscar(id);
+            if (cliente != null) return true;
+            throw new BussinessException("Cliente não Existe");
         }
     }
 }
