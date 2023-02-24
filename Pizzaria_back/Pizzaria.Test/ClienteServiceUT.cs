@@ -28,7 +28,6 @@ namespace Pizzaria.Test
 
             Cliente cliente = new Cliente
             {
-                Id = 1,
                 Ativo = true,
                 Nome= "Fernandinho",
                 Telefone= "41988165786",
@@ -50,13 +49,20 @@ namespace Pizzaria.Test
             var email = "fer@fer.com";
             var cliente = new Cliente
             {
+                Ativo = true,
+                Nome= "Fernandinho",
+                Telefone= "41988165786",
+                Email = email,
+            };
+            var clienteExists = new Cliente {
                 Id = 1,
                 Ativo = true,
                 Nome= "Fernandinho",
                 Telefone= "41988165786",
                 Email = email,
             };
-            clienteRepositoryMock.Setup(x => x.Buscar(email)).Returns(cliente);
+
+            clienteRepositoryMock.Setup(x => x.Buscar(email)).Returns(clienteExists);
 
             Assert.Throws<BussinessException>(() => _clienteService.Inserir(cliente));
         }
