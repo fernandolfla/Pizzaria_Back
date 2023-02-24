@@ -19,13 +19,17 @@ namespace Pizzaria_back.Validators
             RuleFor(x => x)
                 .Must((x) =>
                 {
-                    return clienteRepository.Buscar(x.Email) == null;
+                    var cliente =  clienteRepository.Buscar(x.Email);
+                    if(cliente != null && cliente.Id == x.Id)  return true;
+                    return cliente == null;
                 }).WithMessage("não é possível registrar o mesmo e-mail");
-
-            
-
+            RuleFor(x => x)
+                .Must((x) =>
+                {
+                    var cliente =  clienteRepository.Buscar(x.Email);
+                    if(cliente != null && cliente.Id == x.Id)  return true;
+                    return cliente == null;
+                }).WithMessage("não é possível registrar o mesmo e-mail");
         }
-
-       
     }
 }
