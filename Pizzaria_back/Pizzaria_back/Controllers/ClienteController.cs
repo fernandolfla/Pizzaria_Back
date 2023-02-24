@@ -26,13 +26,8 @@ namespace Pizzaria_back.Controllers
         [HttpPost]
         public IActionResult Inserir([FromBody] Cliente cliente)
         {
-            try{
-                _clienteServices.Inserir(cliente);
-                return Ok();
-            } catch (BussinessException ex){
-                return BadRequest(ex.Message);
-            }
-            
+            _clienteServices.Inserir(cliente);
+            return Ok();
         }
 
         [HttpPut]
