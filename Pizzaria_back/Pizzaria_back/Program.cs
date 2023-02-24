@@ -1,4 +1,5 @@
 using Pizzaria_back.Extensions;
+using Pizzaria_back.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ var app = builder.Build();
 app.UseHttpsRedirection(); 
 
 app.UseAuthorization();
+
+app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 app.MapControllers();
 
