@@ -35,6 +35,11 @@ namespace Pizzaria_back.Repository
             => _applicationDbContext.Clientes
                          .FirstOrDefault(x => x.Email.Equals(email));
 
+        public Cliente BuscarPhone(string phone)  //cliente não podem ter o mesmo e-mail cadastrado 
+            => _applicationDbContext.Clientes
+                         .FirstOrDefault(x => x.Telefone.Equals(phone));
+
+
         public void Deletar(int id) 
         {
             var cliente = this.Buscar(id);
