@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Models;
 using Pizzaria_back.Repository;

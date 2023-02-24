@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pizzaria_back.Repository;
 
@@ -10,9 +11,11 @@ using Pizzaria_back.Repository;
 namespace Pizzariaback.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230219204250_ProdutoFracionado")]
+    partial class ProdutoFracionado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,8 +182,6 @@ namespace Pizzariaback.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoId");
-
                     b.ToTable("Tipos");
                 });
 
@@ -221,17 +222,6 @@ namespace Pizzariaback.Migrations
                         .IsRequired();
 
                     b.Navigation("Tipo");
-                });
-
-            modelBuilder.Entity("Pizzaria_back.Models.Tipo", b =>
-                {
-                    b.HasOne("Pizzaria_back.Models.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Pizzaria_back.Models.Tipo_Tamanho", b =>
