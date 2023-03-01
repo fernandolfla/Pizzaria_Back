@@ -46,5 +46,6 @@ namespace Pizzaria_back.Repository
                 .Where(x => x.Id == id && x.Ativo == true)
                 .FirstOrDefault();
 
+
     }
 }

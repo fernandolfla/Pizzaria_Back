@@ -30,12 +30,12 @@ namespace Pizzaria_back.Controllers
             return Ok();
         }
 
-        //[HttpPut]
-        //public IActionResult Atualizar([FromBody] CategoriaRequest objeto)
-        //{
-        //    _service.Atualizar(objeto);
-        //    return Ok();
-        //}
+        [HttpPut]
+        public IActionResult Atualizar([FromBody] CategoriaRequest objeto)
+        {
+            _service.Atualizar(objeto);
+            return Ok();
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
@@ -43,5 +43,12 @@ namespace Pizzaria_back.Controllers
             _service.Deletar(id);
             return Ok();
         }
+
+        public IActionResult Habilitar(int id)
+        {
+            _service.Habilitar(id);
+            return Ok();
+        }
+
     }
 }

@@ -5,11 +5,10 @@ using System.Reflection.Emit;
 
 namespace Pizzaria_back.Repository.Configuration
 {
-    public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
+    public class ProdutoConfiguration : BaseConfiguration, IEntityTypeConfiguration<Produto>
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            builder.Property(x => x.Id).UseMySqlIdentityColumn();
 
             builder.Property(x => x.Nome).HasMaxLength(255)
                                          .IsRequired();
