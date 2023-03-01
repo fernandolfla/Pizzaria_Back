@@ -34,6 +34,7 @@ namespace Pizzaria_back.Extensions
             services.AddScoped<ITamanhoService, TamanhoService>();
             services.AddScoped<ISaborService, SaborService>();
             services.AddScoped<ITipo_TamanhoService, Tipo_TamanhoService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
             //services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
         }
 
@@ -49,6 +50,7 @@ namespace Pizzaria_back.Extensions
             services.AddScoped<ITamanhoRepository, TamanhoRepository>();
             services.AddScoped<ISaborRepository, SaborRepository>();
             services.AddScoped<ITipo_TamanhoRepository, Tipo_TamanhoRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             //services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
 

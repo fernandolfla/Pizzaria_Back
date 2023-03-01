@@ -2,14 +2,14 @@
 
 namespace Pizzaria_back.Controllers.Model.Response
 {
-    public class SaborResponse
+    public class CategoriaResponse
     {
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        public static implicit operator SaborResponse(Sabor objeto)
+        public static implicit operator CategoriaResponse(Categoria objeto)
         {
-            return new SaborResponse
+            return new CategoriaResponse
             {
                 Id = objeto.Id,
                 Nome = objeto.Nome,

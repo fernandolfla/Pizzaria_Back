@@ -2,13 +2,13 @@
 
 namespace Pizzaria_back.Controllers.Model.Request
 {
-    public class SaborRequest
+    public class CategoriaRequest
     {
         public string Nome { get; set; }
 
-        public static implicit operator Sabor(SaborRequest objeto) 
+        public static implicit operator Categoria(CategoriaRequest objeto)
         {
-            return new Sabor
+            return new Categoria
             {
                 Nome = objeto.Nome
             };

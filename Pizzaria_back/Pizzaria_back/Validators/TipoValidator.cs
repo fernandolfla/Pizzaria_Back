@@ -25,14 +25,6 @@ namespace Pizzaria_back.Validators
                    return repository.Buscar(x.ProdutoId) != null;
                }).WithMessage("Um produto precisa existir para cadastrar seu tipo");
 
-            RuleFor(x => x)
-               .Must((x) =>
-               {
-                   return repository.Buscar(x.ProdutoId).Fracionado == true;
-               }).WithMessage("O produto precisa ser marcado como fracionado");
-
-
-
 
         }
 

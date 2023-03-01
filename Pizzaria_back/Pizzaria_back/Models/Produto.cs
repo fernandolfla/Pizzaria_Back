@@ -7,7 +7,9 @@ namespace Pizzaria_back.Models
         public string Nome { get; set; } = string.Empty;
         public double Preco { get; set; }
         public string Imagem { get; set; } = string.Empty;
-        public bool Fracionado { get; set; }
+
+        public int CategoriaId { get; set; }
+        public Categoria Categoria { get; set; }
 
     }
 }
