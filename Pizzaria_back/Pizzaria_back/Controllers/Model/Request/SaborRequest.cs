@@ -6,11 +6,11 @@ namespace Pizzaria_back.Controllers.Model.Request
     {
         public string Nome { get; set; }
 
-        public static implicit operator Sabor(SaborRequest saborRequest) 
+        public static implicit operator Sabor(SaborRequest objeto) 
         {
             return new Sabor
             {
-                Nome = saborRequest.Nome
+                Nome = objeto.Nome
             };
         }
     }

@@ -7,12 +7,12 @@ namespace Pizzaria_back.Controllers.Model.Response
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        public static implicit operator SaborResponse(Sabor sabor)
+        public static implicit operator SaborResponse(Sabor objeto)
         {
             return new SaborResponse
             {
-                Id = sabor.Id,
-                Nome = sabor.Nome,
+                Id = objeto.Id,
+                Nome = objeto.Nome,
             };
         }
     }

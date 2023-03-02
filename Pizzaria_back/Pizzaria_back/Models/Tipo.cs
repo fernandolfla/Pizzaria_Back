@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Pizzaria_back.Models
+﻿namespace Pizzaria_back.Models
 {
     public class Tipo : DbEntity
     {
         public string Nome { get; set; } = string.Empty;
-        public int ProdutoId { get; set;}
-        public Produto Produto;// { get; set; } verificar com fagner a questão do migration
+        public int ProdutoId { get; set; }
+        public virtual Produto Produto { get; set; }
     }
 }

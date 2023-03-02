@@ -18,6 +18,7 @@ namespace Pizzaria_back.Repository
         public DbSet<Tamanho> Tamanhos { get; set; }
         public DbSet<Tipo_Tamanho> Tipo_Tamanhos { get; set; }
         public DbSet<Sabor> Sabores { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
