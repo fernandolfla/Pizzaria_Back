@@ -26,7 +26,7 @@ namespace Pizzaria_back.Service
             var usuario = new Usuario { Email = email, Senha = senha };
             Validar(usuario);
 
-            var usuarioBD = _usuarioRepository.Buscar(email, senha);
+            var usuarioBD = _usuarioRepository.Buscar(usuario.Email, usuario.Senha);;
             if (usuarioBD == null)
                 throw new UnauthorizedAccessException("Email ou senha invalidos");
 
