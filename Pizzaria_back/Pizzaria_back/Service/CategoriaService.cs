@@ -28,11 +28,8 @@ namespace Pizzaria_back.Service
             return true;
         }
 
-        public void Habilitar(int id) 
-        {
-            var objeto = _repository.Buscar( id);
-            if (Validar(objeto))
-                _repository.Atualizar(objeto);
-        }
+        public List<Categoria> BuscarTudo()
+            => _repository.BuscarTudo();
+
     }
 }

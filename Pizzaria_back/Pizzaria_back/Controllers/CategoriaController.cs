@@ -19,9 +19,15 @@ namespace Pizzaria_back.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("Buscar")]
         public IActionResult Buscar()
             => Ok(_service.Buscar().Select(x => (CategoriaResponse)x));
+
+        [HttpGet("BuscarTudo")]
+        public IActionResult BuscarTudo()
+           => Ok(_service.BuscarTudo().Select(x => (CategoriaResponse)x));
+
+
 
         [HttpPost]
         public IActionResult Inserir([FromBody] CategoriaRequest objeto)
@@ -43,12 +49,5 @@ namespace Pizzaria_back.Controllers
             _service.Deletar(id);
             return Ok();
         }
-
-        public IActionResult Habilitar(int id)
-        {
-            _service.Habilitar(id);
-            return Ok();
-        }
-
     }
 }

@@ -11,7 +11,7 @@ namespace Pizzaria_back.Repository
             _applicationDbContext = applicationDbContext;
         }
 
-        public Categoria Buscar(string nome)  //categoria não podem ser iguais
+        public Categoria? Buscar(string nome)  //categoria não podem ser iguais
             => _applicationDbContext.Categorias
                          .FirstOrDefault(x => x.Nome.Equals(nome));
         public Categoria? Buscar(bool ativo, int id) 
@@ -19,14 +19,8 @@ namespace Pizzaria_back.Repository
             .Where(x => x.Id == id)
             .FirstOrDefault();
 
-        public void Habilitar(int id)
-        {
-            var objeto = this.Buscar(true, id);  //Busca os inativos junto
-            if (objeto != null)
-            {
-                objeto.Ativo = true;
-                this.Atualizar(objeto);
-            }
-        }
+        public List<Categoria> BuscarTudo()
+              => _applicationDbContext.Categorias.ToList();
+
     }
 }
