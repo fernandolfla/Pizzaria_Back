@@ -1,8 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
+using Pizzaria_back.Models.Enum;
 using Pizzaria_back.Repository;
 using Pizzaria_back.Service;
+using System.Text;
 
 namespace Pizzaria_back.Extensions
 {
@@ -20,6 +26,8 @@ namespace Pizzaria_back.Extensions
             services.AdicionarMySQL(configuration);
             services.AdicionarDependenciasRepositorio();
             services.AdicionarDependenciasServicos();
+            services.AdicionarAutenticacao(configuration);
+            services.AdicionarAutorizacao();
         }
 
         /// <summary>
@@ -35,7 +43,9 @@ namespace Pizzaria_back.Extensions
             services.AddScoped<ISaborService, SaborService>();
             services.AddScoped<ITipo_TamanhoService, Tipo_TamanhoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
-            //services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+            services.AddScoped<IUsuarioService, UsuarioService>();
+
+            services.AddSingleton<ITokenService, TokenService>();
         }
 
         /// <summary>
@@ -51,7 +61,7 @@ namespace Pizzaria_back.Extensions
             services.AddScoped<ISaborRepository, SaborRepository>();
             services.AddScoped<ITipo_TamanhoRepository, Tipo_TamanhoRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-            //services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
 
         private static void AdicionarMySQL(this IServiceCollection services, IConfiguration configuration)
@@ -59,5 +69,39 @@ namespace Pizzaria_back.Extensions
             string? mySqlConnection = configuration.GetConnectionString("DB_MySQL");  //Endereço do banco de dados
             services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.Parse("5.5.20")));
         }
+
+        private static void AdicionarAutenticacao(this IServiceCollection services, IConfiguration configuration)
+        {
+            var secret = configuration.GetSection("Authorization").GetValue<string>("Secret");
+
+            var key = Encoding.ASCII.GetBytes(secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+        }
+
+        private static void AdicionarAutorizacao(this IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("user", policy => policy.RequireClaim("papel", PapelEnum.Usuario.ToString()));
+                options.AddPolicy("admin", policy => policy.RequireClaim("papel", PapelEnum.Administrador.ToString()));
+            });
+        }
+
     }
 }

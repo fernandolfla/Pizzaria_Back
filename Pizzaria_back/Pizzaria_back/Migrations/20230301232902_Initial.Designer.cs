@@ -11,8 +11,8 @@ using Pizzaria_back.Repository;
 namespace Pizzariaback.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230219204250_ProdutoFracionado")]
-    partial class ProdutoFracionado
+    [Migration("20230301232902_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,27 @@ namespace Pizzariaback.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Pizzaria_back.Models.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Pizza")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categorias");
+                });
 
             modelBuilder.Entity("Pizzaria_back.Models.Cliente", b =>
                 {
@@ -90,8 +111,8 @@ namespace Pizzariaback.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(true);
 
-                    b.Property<bool>("Fracionado")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Imagem")
                         .IsRequired()
@@ -107,6 +128,8 @@ namespace Pizzariaback.Migrations
                         .HasColumnType("double");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.ToTable("Produtos");
                 });
@@ -182,6 +205,8 @@ namespace Pizzariaback.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProdutoId");
+
                     b.ToTable("Tipos");
                 });
 
@@ -213,6 +238,49 @@ namespace Pizzariaback.Migrations
                     b.ToTable("Tipo_Tamanhos");
                 });
 
+            modelBuilder.Entity("Pizzaria_back.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("Papel")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Pizzaria_back.Models.Produto", b =>
+                {
+                    b.HasOne("Pizzaria_back.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+                });
+
             modelBuilder.Entity("Pizzaria_back.Models.Sabor", b =>
                 {
                     b.HasOne("Pizzaria_back.Models.Tipo", "Tipo")
@@ -222,6 +290,17 @@ namespace Pizzariaback.Migrations
                         .IsRequired();
 
                     b.Navigation("Tipo");
+                });
+
+            modelBuilder.Entity("Pizzaria_back.Models.Tipo", b =>
+                {
+                    b.HasOne("Pizzaria_back.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Pizzaria_back.Models.Tipo_Tamanho", b =>
