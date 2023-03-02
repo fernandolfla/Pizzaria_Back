@@ -19,11 +19,11 @@ namespace Pizzaria_back.Controllers
             _service = service;
         }
 
-        [HttpGet("Buscar")]
+        [HttpGet("[Action]")]
         public IActionResult Buscar()
             => Ok(_service.Buscar().Select(x => (CategoriaResponse)x));
 
-        [HttpGet("BuscarTudo")]
+        [HttpGet("[Action]")]
         public IActionResult BuscarTudo()
            => Ok(_service.BuscarTudo().Select(x => (CategoriaResponse)x));
 

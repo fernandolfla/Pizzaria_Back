@@ -9,6 +9,5 @@ namespace Pizzaria_back.Interfaces.Repository
         void Deletar(int id);
         List<T> Buscar();
         T? Buscar(int id);
-
     }
 }
