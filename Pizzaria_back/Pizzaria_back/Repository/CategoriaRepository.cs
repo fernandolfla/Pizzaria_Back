@@ -15,11 +15,6 @@ namespace Pizzaria_back.Repository
             => _applicationDbContext.Categorias
                          .Any(x => x.Nome.Equals(nome));
 
-        public Categoria? Buscar(bool ativo, int id) 
-        => _applicationDbContext.Categorias
-            .Where(x => x.Id == id)
-            .FirstOrDefault();
-
         public List<Categoria> BuscarTudo()
               => _applicationDbContext.Categorias.ToList();
     }

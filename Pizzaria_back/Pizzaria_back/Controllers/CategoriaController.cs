@@ -20,14 +20,13 @@ namespace Pizzaria_back.Controllers
         }
 
         [HttpGet("[Action]")]
-        public IActionResult Buscar()
-            => Ok(_service.Buscar().Select(x => (CategoriaResponse)x));
+        public IActionResult Buscar([FromQuery] bool todos = false)
+        {
+            if(todos)
+               return Ok(_service.BuscarTudo().Select(x => (CategoriaResponse)x));
 
-        [HttpGet("[Action]")]
-        public IActionResult BuscarTudo()
-           => Ok(_service.BuscarTudo().Select(x => (CategoriaResponse)x));
-
-
+            return Ok(_service.Buscar().Select(x => (CategoriaResponse)x));
+        }
 
         [HttpPost]
         public IActionResult Inserir([FromBody] CategoriaRequest objeto)
@@ -40,13 +39,6 @@ namespace Pizzaria_back.Controllers
         public IActionResult Atualizar([FromBody] CategoriaRequest objeto)
         {
             _service.Atualizar(objeto);
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Deletar(int id)
-        {
-            _service.Deletar(id);
             return Ok();
         }
     }

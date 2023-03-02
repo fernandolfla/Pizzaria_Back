@@ -1,6 +1,7 @@
 ﻿using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Models;
+using Pizzaria_back.Repository;
 using Pizzaria_back.Validators;
 
 namespace Pizzaria_back.Service

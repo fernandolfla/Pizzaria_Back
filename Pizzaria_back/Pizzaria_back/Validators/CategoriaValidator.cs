@@ -15,7 +15,7 @@ namespace Pizzaria_back.Validators
             RuleFor(x => x)
                 .Must((x) =>
                 {
-                    if (repository.Buscar(x.Nome)) return false;
+                    if (repository.Buscar(x.Nome) && x.Id < 1) return false;
                     return true;
                 }).WithMessage("não é possível registrar a mesmo categoria");
         }

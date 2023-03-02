@@ -10,7 +10,8 @@ namespace Pizzaria_back.Repository.Configuration
             {
                 builder.Property(x => x.Nome).HasMaxLength(255)
                                              .IsRequired();
-            }
+            builder.Property(x => x.Pizza).HasDefaultValue(false);
+        }
 
         }
 }
