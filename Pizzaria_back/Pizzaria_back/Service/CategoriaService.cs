@@ -1,9 +1,7 @@
 ﻿using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Models;
-using Pizzaria_back.Repository;
 using Pizzaria_back.Validators;
-using System;
 
 namespace Pizzaria_back.Service
 {
@@ -30,6 +28,5 @@ namespace Pizzaria_back.Service
 
         public List<Categoria> BuscarTudo()
             => _repository.BuscarTudo();
-
     }
 }
