@@ -9,7 +9,7 @@ namespace Pizzaria_back.Models
         public string Imagem { get; set; } = string.Empty;
 
         public int CategoriaId { get; set; }
-        public Categoria Categoria { get; set; }
+        public virtual Categoria Categoria { get; set; }
 
     }
 }

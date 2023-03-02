@@ -15,8 +15,6 @@ namespace Pizzaria_back.Repository.Configuration
 
             builder.Property(x => x.Preco).IsRequired();
 
-            builder.Property(x => x.Ativo).HasDefaultValue(true);
-
             builder.Property(x => x.Imagem).HasMaxLength(255)
                                            .IsRequired();
         }

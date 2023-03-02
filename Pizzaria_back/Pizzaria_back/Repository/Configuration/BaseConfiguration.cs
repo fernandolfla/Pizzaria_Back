@@ -9,6 +9,7 @@ namespace Pizzaria_back.Repository.Configuration
         public void Configure(EntityTypeBuilder<DbEntity> builder)
         {
             builder.Property(x => x.Id).UseMySqlIdentityColumn();
+            builder.Property(x => x.Ativo).HasDefaultValue(true);
         }
     }
 }
