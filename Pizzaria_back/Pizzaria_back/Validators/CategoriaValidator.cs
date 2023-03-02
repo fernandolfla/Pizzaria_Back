@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Models;
-using Pizzaria_back.Repository;
 
 namespace Pizzaria_back.Validators
 {
@@ -16,9 +15,8 @@ namespace Pizzaria_back.Validators
             RuleFor(x => x)
                 .Must((x) =>
                 {
-                    var categoria = repository.Buscar(x.Nome);
-                    if (categoria != null && categoria.Id == x.Id) return true;
-                    return categoria == null;
+                    if (repository.Buscar(x.Nome) && x.Id < 1) return false;
+                    return true;
                 }).WithMessage("não é possível registrar a mesmo categoria");
         }
     }

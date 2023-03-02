@@ -4,6 +4,8 @@ namespace Pizzaria_back.Interfaces.Repository
 {
     public interface ICategoriaRepository : IBaseRepository<Categoria>
     {
-        Categoria Buscar(string nome);
+        bool Buscar(string nome);
+        List<Categoria> BuscarTudo();
+
     }
 }
