@@ -1,8 +1,8 @@
-﻿using Pizzaria_back.Interfaces.Repository;
+﻿using Pizzaria_back.Helpers;
+using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Models;
 using Pizzaria_back.Validators;
-using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria_back.Service
 {
@@ -10,24 +10,27 @@ namespace Pizzaria_back.Service
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly ITokenService _tokenService;
+        private readonly IConfiguration _configuration;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService)
+        public string Secret { get => _configuration.GetSection("Crypto").GetValue<string>("Secret"); }
+
+        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService, IConfiguration configuration)
         {
             _usuarioRepository = usuarioRepository;
             _tokenService = tokenService;
+            _configuration = configuration;
         }
 
         public string Logar(string email, string senha)
         {
-            Validar(new Usuario { Email = email, Senha = senha });
+            var usuario = new Usuario { Email = email, Senha = senha };
+            Validar(usuario);
 
-            var usuario = _usuarioRepository.Buscar(email, senha);
-            if (usuario == null)
+            var usuarioBD = _usuarioRepository.Buscar(email, senha);
+            if (usuarioBD == null)
                 throw new UnauthorizedAccessException("Email ou senha invalidos");
 
-            var token = _tokenService.GenerateToken(usuario);
-
-            return token;
+            return _tokenService.GenerateToken(usuarioBD);
         }
 
         public void Criar(Usuario user)
@@ -41,7 +44,13 @@ namespace Pizzaria_back.Service
         {
             var validator = new UsuarioValidator();
             var validationResult = validator.Validate(usuario);
-            if (!validationResult.IsValid)
+            if (validationResult.IsValid)
+            {
+                usuario.Senha = CriptografiaHelper.CriptografarAes(usuario.Senha, Secret);
+                if (usuario.Senha is null)
+                    throw new BussinessException("Não conseguimos salvar sua senha.");
+            }
+            else
             {
                 var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
                 throw new BussinessException(errors);
