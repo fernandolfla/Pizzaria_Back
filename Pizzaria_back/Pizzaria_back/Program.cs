@@ -37,15 +37,6 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.Services.AdicionarDependenciasPizzaria(builder.Configuration);
 
-//builder.Services.Configure<RewriteOptions>(options =>
-//{
-//    options.AddRedirect("(.*)/$", "$1")
-//           .AddRewrite(@"app/(\d+)", "app?id=$1", skipRemainingRules: false)
-//           .AddRedirectToHttps(302, 5001)
-//           .AddIISUrlRewrite(Environment.CurrentDirectory, "UrlRewrite.xml")
-//           .AddApacheModRewrite(Environment.CurrentDirectory, "Rewrite.txt");
-//});
-
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
@@ -54,24 +45,8 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-//var options = new RewriteOptions().AddIISUrlRewrite(app.Environment.ContentRootFileProvider, "UrlRewrite.xml");
-//app.UseRewriter(options);
-
-using (StreamReader apacheModRewriteStreamReader =
-    File.OpenText("ApacheModRewrite.txt"))
-using (StreamReader iisUrlRewriteStreamReader =
-    File.OpenText("IISUrlRewrite.xml"))
-{
-    var options = new RewriteOptions()
-        .AddRedirectToHttpsPermanent()
-        .AddRedirect("redirect-rule/(.*)", "redirected/$1")
-        .AddRewrite(@"^rewrite-rule/(\d+)/(\d+)", "rewritten?var1=$1&var2=$2",
-            skipRemainingRules: true)
-        .AddApacheModRewrite(apacheModRewriteStreamReader)
-        .AddIISUrlRewrite(iisUrlRewriteStreamReader);
-
-    app.UseRewriter(options);
-}
+var options = new RewriteOptions().AddIISUrlRewrite(app.Environment.ContentRootFileProvider, "UrlRewrite.xml");
+app.UseRewriter(options);
 
 app.UseHttpsRedirection(); 
 
