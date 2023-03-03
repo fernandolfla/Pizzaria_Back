@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.OpenApi.Models;
 using Pizzaria_back.Extensions;
 using Pizzaria_back.Middlewares;
@@ -44,6 +45,9 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var options = new RewriteOptions().AddIISUrlRewrite(app.Environment.ContentRootFileProvider, "UrlRewrite.xml");
+app.UseRewriter(options);
 
 app.UseHttpsRedirection(); 
 
