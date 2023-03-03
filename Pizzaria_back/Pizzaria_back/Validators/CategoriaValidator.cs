@@ -8,6 +8,8 @@ namespace Pizzaria_back.Validators
     {
         public CategoriaValidator(ICategoriaRepository repository)
         {
+            RuleFor(x => x.Id).GreaterThanOrEqualTo(0).WithMessage("Id com erro");
+
             RuleFor(x => x.Nome).NotEmpty()
                              .NotNull().WithMessage("Tamanho precisa ter seu nome especificado")
                              .MinimumLength(3).WithMessage("O Tamanho deve conter no mínimo 3 letras");
