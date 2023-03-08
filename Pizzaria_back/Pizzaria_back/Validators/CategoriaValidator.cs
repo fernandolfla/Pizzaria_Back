@@ -8,7 +8,7 @@ namespace Pizzaria_back.Validators
     {
         public CategoriaValidator(ICategoriaRepository repository)
         {
-            RuleFor(x => x.Id).GreaterThanOrEqualTo(0).WithMessage("Id com erro");
+            RuleFor(x => x.Id).GreaterThanOrEqualTo(0).WithMessage("categoria invalida");
 
             RuleFor(x => x.Nome).NotEmpty()
                              .NotNull().WithMessage("Tamanho precisa ter seu nome especificado")
