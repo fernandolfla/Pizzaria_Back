@@ -11,13 +11,15 @@ namespace Pizzaria_back.Repository
             _context = context;
         }
 
-        public Usuario? Buscar(string email, string senha)
-            => _context.Usuarios.FirstOrDefault(x => x.Ativo && x.Email == email && x.Senha == senha);
-
         public void Criar(Usuario user)
         {
             _context.Usuarios.Add(user);
             _context.SaveChanges();
+        }
+
+        public IQueryable<Usuario> Buscar()
+        {
+            return _context.Usuarios;
         }
     }
 }

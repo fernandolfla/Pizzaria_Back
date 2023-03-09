@@ -26,7 +26,7 @@ namespace Pizzaria_back.Service
             var usuario = new Usuario { Email = email, Senha = senha };
             Validar(usuario);
 
-            var usuarioBD = _usuarioRepository.Buscar(usuario.Email, usuario.Senha);;
+            var usuarioBD = _usuarioRepository.Buscar().FirstOrDefault(x => x.Ativo && x.Email == usuario.Email && x.Senha == usuario.Senha);
             if (usuarioBD == null)
                 throw new UnauthorizedAccessException("Email ou senha invalidos");
 
@@ -42,13 +42,11 @@ namespace Pizzaria_back.Service
 
         private void Validar(Usuario usuario)
         {
-            var validator = new UsuarioValidator();
+            var validator = new UsuarioValidator(_usuarioRepository);
             var validationResult = validator.Validate(usuario);
             if (validationResult.IsValid)
             {
-                usuario.Senha = CriptografiaHelper.CriptografarAes(usuario.Senha, Secret);
-                if (usuario.Senha is null)
-                    throw new BussinessException("Não conseguimos salvar sua senha.");
+                usuario.Senha = CriptografiaHelper.CriptografarAes(usuario.Senha, Secret) ?? throw new BussinessException("Não conseguimos salvar sua senha.");
             }
             else
             {
