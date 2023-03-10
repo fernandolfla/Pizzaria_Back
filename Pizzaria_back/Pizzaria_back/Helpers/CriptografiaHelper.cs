@@ -97,63 +97,77 @@ namespace Pizzaria_back.Helpers
             );
         }
 
-        public static string DescriptografarAes(string encryptedString, string passphrase)
+        public static string? DescriptografarAes(string encryptedString, string passphrase)
         {
-            var base64Bytes = Convert.FromBase64String(encryptedString);
-            var saltBytes = base64Bytes[8..16];
-            var cipherTextBytes = base64Bytes[16..];
-            var passphraseBytes = Encoding.UTF8.GetBytes(passphrase);
+            try
+            {
+                var base64Bytes = Convert.FromBase64String(encryptedString);
+                var saltBytes = base64Bytes[8..16];
+                var cipherTextBytes = base64Bytes[16..];
+                var passphraseBytes = Encoding.UTF8.GetBytes(passphrase);
 
-            DeriveKeyAndIv(
-                passphraseBytes,
-                saltBytes,
-                1,
-                out var keyBytes,
-                out var ivBytes
-            );
-            using var aes = Aes.Create();
-            aes.Key = keyBytes;
-            aes.IV = ivBytes;
-            aes.KeySize = 256;
-            aes.Padding = PaddingMode.PKCS7;
-            aes.Mode = CipherMode.CBC;
-            var decryptor = aes.CreateDecryptor(keyBytes, ivBytes);
-            using var msDecrypt = new MemoryStream(cipherTextBytes);
-            using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
-            using var srDecrypt = new StreamReader(csDecrypt);
-            return srDecrypt.ReadToEnd();
+                DeriveKeyAndIv(
+                    passphraseBytes,
+                    saltBytes,
+                    1,
+                    out var keyBytes,
+                    out var ivBytes
+                );
+                using var aes = Aes.Create();
+                aes.Key = keyBytes;
+                aes.IV = ivBytes;
+                aes.KeySize = 256;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.Mode = CipherMode.CBC;
+                var decryptor = aes.CreateDecryptor(keyBytes, ivBytes);
+                using var msDecrypt = new MemoryStream(cipherTextBytes);
+                using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+                using var srDecrypt = new StreamReader(csDecrypt);
+                return srDecrypt.ReadToEnd();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public static string CriptografarAes(string plainText, string passphrase)
+        public static string? CriptografarAes(string plainText, string passphrase)
         {
-            var salt = new byte[8];
-            var passphraseBytes = Encoding.UTF8.GetBytes(passphrase);
-            DeriveKeyAndIv(
-               passphraseBytes,
-               salt,
-               1,
-               out var key,
-               out var iv
-            );
-            using var aes = Aes.Create();
-            aes.Key = key;
-            aes.IV = iv;
-            aes.KeySize = 256;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
-            var encryptor = aes.CreateEncryptor(key, iv);
-            using var msEncrypt = new MemoryStream();
-            using var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write);
-            using var swEncrypt = new StreamWriter(csEncrypt);
-            swEncrypt.Write(plainText);
-            swEncrypt.Flush();
-            swEncrypt.Close();
-            var encryptedBytes = msEncrypt.ToArray();
-            var encryptedBytesWithSalt = new byte[salt.Length + encryptedBytes.Length + 8];
-            Buffer.BlockCopy(Encoding.ASCII.GetBytes("Salted__"), 0, encryptedBytesWithSalt, 0, 8);
-            Buffer.BlockCopy(salt, 0, encryptedBytesWithSalt, 8, salt.Length);
-            Buffer.BlockCopy(encryptedBytes, 0, encryptedBytesWithSalt, salt.Length + 8, encryptedBytes.Length);
-            return Convert.ToBase64String(encryptedBytesWithSalt);
+            try
+            {
+                var salt = new byte[8];
+                var passphraseBytes = Encoding.UTF8.GetBytes(passphrase);
+                DeriveKeyAndIv(
+                   passphraseBytes,
+                   salt,
+                   1,
+                   out var key,
+                   out var iv
+                );
+                using var aes = Aes.Create();
+                aes.Key = key;
+                aes.IV = iv;
+                aes.KeySize = 256;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+                var encryptor = aes.CreateEncryptor(key, iv);
+                using var msEncrypt = new MemoryStream();
+                using var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write);
+                using var swEncrypt = new StreamWriter(csEncrypt);
+                swEncrypt.Write(plainText);
+                swEncrypt.Flush();
+                swEncrypt.Close();
+                var encryptedBytes = msEncrypt.ToArray();
+                var encryptedBytesWithSalt = new byte[salt.Length + encryptedBytes.Length + 8];
+                Buffer.BlockCopy(Encoding.ASCII.GetBytes("Salted__"), 0, encryptedBytesWithSalt, 0, 8);
+                Buffer.BlockCopy(salt, 0, encryptedBytesWithSalt, 8, salt.Length);
+                Buffer.BlockCopy(encryptedBytes, 0, encryptedBytesWithSalt, salt.Length + 8, encryptedBytes.Length);
+                return Convert.ToBase64String(encryptedBytesWithSalt);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
