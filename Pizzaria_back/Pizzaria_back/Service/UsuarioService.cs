@@ -24,7 +24,7 @@ namespace Pizzaria_back.Service
         public string Logar(string email, string senha)
         {
             var usuario = new Usuario { Email = email, Senha = senha };
-            Validar(usuario);
+            Validar(usuario, true);
 
             var usuarioBD = _usuarioRepository.Buscar().FirstOrDefault(x => x.Ativo && x.Email == usuario.Email && x.Senha == usuario.Senha);
             if (usuarioBD == null)
@@ -35,14 +35,14 @@ namespace Pizzaria_back.Service
 
         public void Criar(Usuario user)
         {
-            Validar(user);
+            Validar(user, false);
 
             _usuarioRepository.Criar(user);
         }
 
-        private void Validar(Usuario usuario)
+        private void Validar(Usuario usuario, bool eLogin)
         {
-            var validator = new UsuarioValidator(_usuarioRepository);
+            var validator = new UsuarioValidator(_usuarioRepository, eLogin);
             var validationResult = validator.Validate(usuario);
             if (validationResult.IsValid)
             {
