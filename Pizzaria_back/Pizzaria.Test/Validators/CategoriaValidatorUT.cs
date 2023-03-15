@@ -4,11 +4,6 @@ using Moq;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Models;
 using Pizzaria_back.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Pizzaria.Test.Validators
@@ -28,14 +23,14 @@ namespace Pizzaria.Test.Validators
 
 
         [Fact]
-        public void CategoriasValidator_Validar_Id_Negativo_Updates() 
+        public void CategoriasValidator_Validar_Id_Negativo_Updates()
         {
             //Arrange
             var Categoria = new Categoria
             {
                 Id = faker.Random.Int(-99999999, -1),
                 Ativo = true,
-                Nome = faker.Name.ToString(),
+                Nome = "Name",
                 Pizza = false,
             };
 
@@ -44,14 +39,30 @@ namespace Pizzaria.Test.Validators
 
             //Assert
             validadorCategoria.Errors.Should().NotBeNullOrEmpty();
-
-            //validadorUsuario.Errors.Should().NotBeNullOrEmpty();
-            //validadorUsuario.Errors.Should().HaveCount(1);
-            //validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == "Email invalido");
-
-
+            validadorCategoria.Errors.Should().HaveCount(1);
+            validadorCategoria.Errors.Should().Contain(x => x.ErrorMessage == "categoria invalida");
         }
 
+        [Theory]
+        [InlineData("")]//Nome sem preencher
+        [InlineData("a")]//Nome com menos de 3 caracteres
+        [InlineData("ab")]//Nome com menos de 3 caracteres
+        public void CategoriasValidator_Validar_Nome(string nome)
+        {
+            //Arrange
+            var Categoria = new Categoria
+            {
+                Id = faker.Random.Int(0, 99999999),
+                Ativo = true,
+                Nome = nome,
+                Pizza = false,
+            };
 
+            //Act
+            var validadorCategoria = validator.Validate(Categoria);
+
+            //Assert
+            validadorCategoria.Errors.Should().NotBeNullOrEmpty();
+        }
     }
 }
