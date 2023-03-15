@@ -10,15 +10,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Pizzaria.Test
+namespace Pizzaria.Test.Services
 {
     public class ClienteServiceUT
     {
         private ClienteService _clienteService;
         private Mock<IClienteRepository> clienteRepositoryMock;
-        public ClienteServiceUT() {
-            this.clienteRepositoryMock = new Mock<IClienteRepository>();
-            this._clienteService= new ClienteService(clienteRepositoryMock.Object);
+        public ClienteServiceUT()
+        {
+            clienteRepositoryMock = new Mock<IClienteRepository>();
+            _clienteService = new ClienteService(clienteRepositoryMock.Object);
         }
 
         [Fact]
@@ -29,8 +30,8 @@ namespace Pizzaria.Test
             Cliente cliente = new Cliente
             {
                 Ativo = true,
-                Nome= "Fernandinho",
-                Telefone= "41988165786",
+                Nome = "Fernandinho",
+                Telefone = "41988165786",
                 Email = "fer@fer.com",
 
             };
@@ -50,15 +51,16 @@ namespace Pizzaria.Test
             var cliente = new Cliente
             {
                 Ativo = true,
-                Nome= "Fernandinho",
-                Telefone= "41988165786",
+                Nome = "Fernandinho",
+                Telefone = "41988165786",
                 Email = email,
             };
-            var clienteExists = new Cliente {
+            var clienteExists = new Cliente
+            {
                 Id = 1,
                 Ativo = true,
-                Nome= "Fernandinho",
-                Telefone= "41988165786",
+                Nome = "Fernandinho",
+                Telefone = "41988165786",
                 Email = email,
             };
 
@@ -100,16 +102,16 @@ namespace Pizzaria.Test
             var id = 1;
             clienteRepositoryMock.Setup(x => x.Buscar(id)).Returns(
                  new Cliente
-                        {
-                            Id = 1,
-                            Ativo = true,
-                            Nome= "Fernandinho",
-                            Telefone= "41988165786",
-                            Email = "fer@fer.com",
-                        }
+                 {
+                     Id = 1,
+                     Ativo = true,
+                     Nome = "Fernandinho",
+                     Telefone = "41988165786",
+                     Email = "fer@fer.com",
+                 }
             );
 
-            Assert.NotNull(_clienteService.Buscar(id)); 
+            Assert.NotNull(_clienteService.Buscar(id));
         }
 
         [Fact]
@@ -125,8 +127,8 @@ namespace Pizzaria.Test
             {
                 Id = 1,
                 Ativo = true,
-                Nome= "Fernandinho",
-                Telefone= "41988165786",
+                Nome = "Fernandinho",
+                Telefone = "41988165786",
                 Email = "fer@fer.com",
             };
             Assert.Throws<BussinessException>(() => _clienteService.Atualizar(cliente));
@@ -139,8 +141,8 @@ namespace Pizzaria.Test
             {
                 Id = 1,
                 Ativo = true,
-                Nome= "Fernandinho",
-                Telefone= "41988165786",
+                Nome = "Fernandinho",
+                Telefone = "41988165786",
                 Email = "fer@fer.com",
             };
 
@@ -158,8 +160,8 @@ namespace Pizzaria.Test
             {
                 Id = 1,
                 Ativo = true,
-                Nome= "Fernandinho",
-                Telefone= "41988165786",
+                Nome = "Fernandinho",
+                Telefone = "41988165786",
                 Email = "fer@fer.com",
             };
 
