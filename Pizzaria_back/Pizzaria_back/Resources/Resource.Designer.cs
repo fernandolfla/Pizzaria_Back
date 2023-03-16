@@ -86,5 +86,23 @@ namespace Pizzaria_back.Resources {
                 return ResourceManager.GetString("usuario.emailduplicado", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email ou senha invalidos.
+        /// </summary>
+        public static string usuario_emailSenhaInvalido {
+            get {
+                return ResourceManager.GetString("usuario.emailSenhaInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não conseguimos salvar sua senha..
+        /// </summary>
+        public static string usuario_falhaCriptografia {
+            get {
+                return ResourceManager.GetString("usuario.falhaCriptografia", resourceCulture);
+            }
+        }
     }
 }

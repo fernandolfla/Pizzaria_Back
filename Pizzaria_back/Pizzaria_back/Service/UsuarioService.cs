@@ -2,6 +2,7 @@
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Models;
+using Pizzaria_back.Resources;
 using Pizzaria_back.Validators;
 
 namespace Pizzaria_back.Service
@@ -12,7 +13,7 @@ namespace Pizzaria_back.Service
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
 
-        public string Secret { get => _configuration.GetSection("Crypto").GetValue<string>("Secret"); }
+        public string Secret { get => _configuration.GetValue<string>("Crypto:Secret"); }
 
         public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService, IConfiguration configuration)
         {
@@ -28,7 +29,7 @@ namespace Pizzaria_back.Service
 
             var usuarioBD = _usuarioRepository.Buscar().FirstOrDefault(x => x.Ativo && x.Email == usuario.Email && x.Senha == usuario.Senha);
             if (usuarioBD == null)
-                throw new UnauthorizedAccessException("Email ou senha invalidos");
+                throw new UnauthorizedAccessException(Resource.usuario_emailSenhaInvalido);
 
             return _tokenService.GenerateToken(usuarioBD);
         }
@@ -46,7 +47,7 @@ namespace Pizzaria_back.Service
             var validationResult = validator.Validate(usuario);
             if (validationResult.IsValid)
             {
-                usuario.Senha = CriptografiaHelper.CriptografarAes(usuario.Senha, Secret) ?? throw new BussinessException("Não conseguimos salvar sua senha.");
+                usuario.Senha = CriptografiaHelper.CriptografarAes(usuario.Senha, Secret) ?? throw new BussinessException(Resource.usuario_falhaCriptografia);
             }
             else
             {

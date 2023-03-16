@@ -4,7 +4,7 @@ using Pizzaria_back.Models;
 using Pizzaria_back.Service;
 using Xunit;
 
-namespace Pizzaria.Test
+namespace Pizzaria.Test.Services
 {
     public class ProdutoServiceUT
     {
