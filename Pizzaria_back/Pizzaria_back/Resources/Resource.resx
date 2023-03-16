@@ -126,4 +126,10 @@
   <data name="usuario.emailduplicado" xml:space="preserve">
     <value>Não é possivel cadastrar uma conta para este email.</value>
   </data>
+  <data name="usuario.emailSenhaInvalido" xml:space="preserve">
+    <value>Email ou senha invalidos</value>
+  </data>
+  <data name="usuario.falhaCriptografia" xml:space="preserve">
+    <value>Não conseguimos salvar sua senha.</value>
+  </data>
 </root>
