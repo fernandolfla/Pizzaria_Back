@@ -3,6 +3,7 @@ using FluentAssertions;
 using Moq;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Models;
+using Pizzaria_back.Repository;
 using Pizzaria_back.Validators;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace Pizzaria.Test.Validators
         public void CategoriasValidator_Validar_Id_Negativo_Updates()
         {
             //Arrange
-            var Categoria = new Categoria
+            var categoria = new Categoria
             {
                 Id = faker.Random.Int(-99999999, -1),
                 Ativo = true,
@@ -35,7 +36,7 @@ namespace Pizzaria.Test.Validators
             };
 
             //Act
-            var validadorCategoria = validator.Validate(Categoria);
+            var validadorCategoria = validator.Validate(categoria);
 
             //Assert
             validadorCategoria.Errors.Should().NotBeNullOrEmpty();
@@ -50,7 +51,7 @@ namespace Pizzaria.Test.Validators
         public void CategoriasValidator_Validar_Nome(string nome)
         {
             //Arrange
-            var Categoria = new Categoria
+            var categoria = new Categoria
             {
                 Id = faker.Random.Int(0, 99999999),
                 Ativo = true,
@@ -59,10 +60,52 @@ namespace Pizzaria.Test.Validators
             };
 
             //Act
-            var validadorCategoria = validator.Validate(Categoria);
+            var validadorCategoria = validator.Validate(categoria);
 
             //Assert
             validadorCategoria.Errors.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public void CategoriasValidator_Validar_Nome_Correto()
+        {
+            //Arrange
+            var categoria = new Categoria
+            {
+                Id = faker.Random.Int(0, 99999999),
+                Ativo = true,
+                Nome = faker.Lorem.Letter(3),
+                Pizza = false,
+            };
+
+            //Act
+            var validadorCategoria = validator.Validate(categoria);
+
+            //Assert
+            validadorCategoria.Errors.Should().BeNullOrEmpty();
+        }
+
+        [Fact]
+        public void CategoriasValidator_Validar_Nome_Duplicado()
+        {
+            //Arrange
+            //string nome = "";
+            var categoria = new Categoria
+            {
+                Id = faker.Random.Int(0, 99999999),
+                Ativo = true,
+                Nome = faker.Lorem.Letter(3),
+                Pizza = false,
+            };
+
+            categoriasRepository.Setup(x => x.Buscar()).Returns(new List<Categoria> { categoria });
+
+            //Act
+            var validadorCategoria = validator.Validate(categoria);
+
+            //Assert
+            validadorCategoria.Errors.Should().NotBeNullOrEmpty();
+            validadorCategoria.Errors.Should().HaveCount(1);
         }
     }
 }
