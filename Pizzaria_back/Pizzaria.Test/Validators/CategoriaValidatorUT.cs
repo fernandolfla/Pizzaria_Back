@@ -3,11 +3,9 @@ using FluentAssertions;
 using Moq;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Models;
-using Pizzaria_back.Repository;
 using Pizzaria_back.Resources;
 using Pizzaria_back.Validators;
 using Xunit;
-using Pizzaria_back.Resources;
 
 namespace Pizzaria.Test.Validators
 {
@@ -33,7 +31,7 @@ namespace Pizzaria.Test.Validators
             {
                 Id = faker.Random.Int(-99999999, -1),
                 Ativo = true,
-                Nome = "Name",
+                Nome = faker.Lorem.Letter(3),
                 Pizza = false,
             };
 
@@ -101,7 +99,7 @@ namespace Pizzaria.Test.Validators
             };
 
             categoriasRepository.Setup(x => x.Buscar(nome)).Returns(true);
-            
+
             //Act
             var validadorCategoria = validator.Validate(categoria);
 
