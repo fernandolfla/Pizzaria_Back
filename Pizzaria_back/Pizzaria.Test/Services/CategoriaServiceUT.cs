@@ -29,7 +29,7 @@ namespace Pizzaria.Test.Services
             {
                 Id = 0,
                 Ativo = true,
-                Nome = faker.Lorem.Letter(3),
+                Nome = faker.Person.FirstName,
                 Pizza = false,
             };
 
@@ -46,9 +46,9 @@ namespace Pizzaria.Test.Services
             //Arrange
             var categoria = new Categoria
             {
-                Id = faker.Random.Int(1, 99999999),
+                Id = faker.Random.Int(1, int.MaxValue),
                 Ativo = true,
-                Nome = faker.Lorem.Letter(3),
+                Nome = faker.Person.FirstName,
                 Pizza = false,
             };
 
@@ -71,9 +71,9 @@ namespace Pizzaria.Test.Services
             {
                 categorias.Add(new Categoria
                 {
-                    Id = faker.Random.Int(),
+                    Id = faker.Random.Int(1, int.MaxValue),
                     Ativo = true,
-                    Nome = faker.Lorem.Letter(10),
+                    Nome = faker.Person.FirstName,
                     Pizza = false
                 });
             }

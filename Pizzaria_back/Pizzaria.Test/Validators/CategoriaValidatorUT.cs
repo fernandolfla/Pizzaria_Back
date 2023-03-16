@@ -29,9 +29,9 @@ namespace Pizzaria.Test.Validators
             //Arrange
             var categoria = new Categoria
             {
-                Id = faker.Random.Int(-99999999, -1),
+                Id = faker.Random.Int(int.MinValue, -1),
                 Ativo = true,
-                Nome = faker.Lorem.Letter(3),
+                Nome = faker.Person.FirstName,
                 Pizza = false,
             };
 
@@ -53,7 +53,7 @@ namespace Pizzaria.Test.Validators
             //Arrange
             var categoria = new Categoria
             {
-                Id = faker.Random.Int(0, 99999999),
+                Id = faker.Random.Int(0, int.MaxValue),
                 Ativo = true,
                 Nome = nome,
                 Pizza = false,
@@ -72,9 +72,9 @@ namespace Pizzaria.Test.Validators
             //Arrange
             var categoria = new Categoria
             {
-                Id = faker.Random.Int(0, 99999999),
+                Id = faker.Random.Int(0, int.MaxValue),
                 Ativo = true,
-                Nome = faker.Lorem.Letter(3),
+                Nome = faker.Person.FirstName,
                 Pizza = false,
             };
 
@@ -89,7 +89,7 @@ namespace Pizzaria.Test.Validators
         public void CategoriasValidator_Validar_Nome_Duplicado() //Não pode inserir duplicado, Id = 0
         {
             //Arrange
-            string nome = faker.Lorem.Letter(3);
+            string nome = faker.Person.FirstName;
             var categoria = new Categoria
             {
                 Id = 0,
@@ -113,10 +113,10 @@ namespace Pizzaria.Test.Validators
         public void CategoriasValidator_Validar_Nome_NaoDuplicaUpdate() //Pode atualizar com mesmo nome, id != 0
         {
             //Arrange
-            string nome = faker.Lorem.Letter(3);
+            string nome = faker.Person.FirstName;
             var categoria = new Categoria
             {
-                Id = faker.Random.Int(1, 99999999),
+                Id = faker.Random.Int(1, int.MaxValue),
                 Ativo = true,
                 Nome = nome,
                 Pizza = false,
