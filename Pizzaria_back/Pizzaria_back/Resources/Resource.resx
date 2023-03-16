@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="categoria.idInvalido" xml:space="preserve">
+    <value>Categoria Inválida</value>
+  </data>
+  <data name="categoria.nomeduplicado" xml:space="preserve">
+    <value>Não é possível registrar a mesmo categoria</value>
+  </data>
+  <data name="categoria.tamanhoInvalido" xml:space="preserve">
+    <value>Categoria precisa ter seu nome especificado</value>
+  </data>
+  <data name="categoria.tamanhomenor" xml:space="preserve">
+    <value>O noem da categoria deve conter no mínimo 3 letras</value>
+  </data>
   <data name="usario.emailInvalido" xml:space="preserve">
     <value>Email invalido.</value>
   </data>

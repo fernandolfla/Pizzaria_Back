@@ -4,8 +4,10 @@ using Moq;
 using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Models;
 using Pizzaria_back.Repository;
+using Pizzaria_back.Resources;
 using Pizzaria_back.Validators;
 using Xunit;
+using Pizzaria_back.Resources;
 
 namespace Pizzaria.Test.Validators
 {
@@ -41,7 +43,7 @@ namespace Pizzaria.Test.Validators
             //Assert
             validadorCategoria.Errors.Should().NotBeNullOrEmpty();
             validadorCategoria.Errors.Should().HaveCount(1);
-            validadorCategoria.Errors.Should().Contain(x => x.ErrorMessage == "categoria invalida");
+            validadorCategoria.Errors.Should().Contain(x => x.ErrorMessage == Resource.categoria_idInvalido);
         }
 
         [Theory]
@@ -106,6 +108,7 @@ namespace Pizzaria.Test.Validators
             //Assert
             validadorCategoria.Errors.Should().NotBeNullOrEmpty();
             validadorCategoria.Errors.Should().HaveCount(1);
+            validadorCategoria.Errors.Should().Contain(x => x.ErrorMessage == Resource.categoria_nomeduplicado);
         }
 
         [Fact]
