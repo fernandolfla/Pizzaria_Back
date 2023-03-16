@@ -1,8 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Pizzaria_back.Helpers
 {
+    [ExcludeFromCodeCoverage]
     public class CriptografiaHelper
     {
         private static void DeriveKeyAndIv(

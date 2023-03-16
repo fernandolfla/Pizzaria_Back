@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pizzaria_back.Controllers.Model.Request;
 using Pizzaria_back.Interfaces.Service;

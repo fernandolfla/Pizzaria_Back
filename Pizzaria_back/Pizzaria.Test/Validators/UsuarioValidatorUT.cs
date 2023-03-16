@@ -7,6 +7,7 @@ using Pizzaria_back.Validators;
 using Xunit;
 using FluentValidation;
 using FluentAssertions;
+using Pizzaria_back.Resources;
 
 namespace Pizzaria.Test.Validators
 {
@@ -47,7 +48,7 @@ namespace Pizzaria.Test.Validators
             //Assert.NotEmpty(validationResult.Errors); -> padrão do xunit
             validadorUsuario.Errors.Should().NotBeNullOrEmpty();
             validadorUsuario.Errors.Should().HaveCount(1);
-            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == "Email invalido");
+            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == Resource.usario_emailInvalido);
         }
 
         [Fact]
@@ -70,7 +71,7 @@ namespace Pizzaria.Test.Validators
             //Assert.NotEmpty(validationResult.Errors); -> padrão do xunit
             validadorUsuario.Errors.Should().NotBeNullOrEmpty();
             validadorUsuario.Errors.Should().HaveCount(1);
-            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == "Email invalido");
+            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == Resource.usario_emailInvalido);
         }
 
         [Fact]
@@ -113,7 +114,7 @@ namespace Pizzaria.Test.Validators
 
             //Assert
             validadorUsuario.IsValid.Should().BeFalse();
-            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == "Não é possivel cadastrar uma conta para este email.");
+            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == Resource.usuario_emailduplicado);
         }
 
         [Theory]
@@ -140,7 +141,7 @@ namespace Pizzaria.Test.Validators
             //Assert
             validadorUsuario.Errors.Should().NotBeNullOrEmpty();
             validadorUsuario.Errors.Should().HaveCount(1);
-            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == "A senha deve conter ao menos um dígito, uma letra minúscula,uma letra maiúscula,um caractere especial e 8 dos caracteres");
+            validadorUsuario.Errors.Should().Contain(x => x.ErrorMessage == Resource.usario_senhaInvalida);
         }
 
     }
