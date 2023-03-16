@@ -61,6 +61,42 @@ namespace Pizzaria_back.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria Inválida.
+        /// </summary>
+        public static string categoria_idInvalido {
+            get {
+                return ResourceManager.GetString("categoria.idInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possível registrar a mesmo categoria.
+        /// </summary>
+        public static string categoria_nomeduplicado {
+            get {
+                return ResourceManager.GetString("categoria.nomeduplicado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Categoria precisa ter seu nome especificado.
+        /// </summary>
+        public static string categoria_tamanhoInvalido {
+            get {
+                return ResourceManager.GetString("categoria.tamanhoInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O noem da categoria deve conter no mínimo 3 letras.
+        /// </summary>
+        public static string categoria_tamanhomenor {
+            get {
+                return ResourceManager.GetString("categoria.tamanhomenor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Email invalido..
         /// </summary>
         public static string usario_emailInvalido {

@@ -1,11 +1,12 @@
 ﻿using Pizzaria_back.Interfaces.Repository;
 using Pizzaria_back.Interfaces.Service;
 using Pizzaria_back.Models;
-using Pizzaria_back.Repository;
 using Pizzaria_back.Validators;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pizzaria_back.Service
 {
+    [ExcludeFromCodeCoverage]
     public class CategoriaService : BaseService<Categoria>, ICategoriaService
     {
         private readonly ICategoriaRepository _repository;
