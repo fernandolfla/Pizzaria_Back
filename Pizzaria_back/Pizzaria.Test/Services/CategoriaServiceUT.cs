@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Pizzaria.Test.Services
 {
-    [ExcludeFromCodeCoverage]
     public class CategoriaServiceUT
     {
         private Faker faker;
