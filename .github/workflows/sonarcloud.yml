@@ -1,4 +1,4 @@
-name: SonarCloud
+name: SonarCloud #ci automatico desabilitada
 on:
   push:
     branches:
