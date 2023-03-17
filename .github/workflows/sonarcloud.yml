@@ -50,4 +50,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"fernandolfla_Pizzaria_Back" /o:"fernandolfla" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build ./Pizzaria_back/Pizzaria_back.sln -c Release 
+          dotnet test ./Pizzaria_back/Pizzaria_back.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
