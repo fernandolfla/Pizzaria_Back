@@ -29,4 +29,4 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /wwwroot/apidev/
         local-dir: ./Pizzaria_back/Pizzaria_back/bin/Release/net6.0/publish/
-        protocol: ftp
+        protocol: ftp 
