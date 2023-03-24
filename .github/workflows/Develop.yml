@@ -18,7 +18,7 @@ jobs:
     - name: Build
       run: dotnet build ./Pizzaria_back/Pizzaria_back.sln -c Release 
     - name: Test
-      run: dotnet test ./Pizzaria_back/Pizzaria.Test.sln -c Release
+      run: dotnet test ./Pizzaria_back/Pizzaria_back.sln -c Release
     - name: Publish
       run: dotnet publish ./Pizzaria_back/Pizzaria_back.sln -c Release     
     - name: 📂 Sync files
