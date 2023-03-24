@@ -38,7 +38,9 @@ namespace Pizzaria_back.Middlewares
             if (exception is BussinessException) code = HttpStatusCode.BadRequest;
             else if(exception is UnauthorizedAccessException) code = HttpStatusCode.Unauthorized;
 
-            var result = JsonConvert.SerializeObject(new { error = exception.Message });
+            var result = code == HttpStatusCode.InternalServerError ?
+                JsonConvert.SerializeObject(new { error = exception.Message, stacktrace = exception.StackTrace, innerException = exception.InnerException }) :
+                JsonConvert.SerializeObject(new { error = exception.Message });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
             return context.Response.WriteAsync(result);

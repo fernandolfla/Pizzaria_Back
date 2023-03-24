@@ -54,7 +54,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-//app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 app.MapControllers();
 
