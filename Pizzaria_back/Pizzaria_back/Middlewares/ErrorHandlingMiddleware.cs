@@ -21,14 +21,14 @@ namespace Pizzaria_back.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            try
-            {
+            //try
+            //{
                 await next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    await HandleExceptionAsync(context, ex);
+            //}
         }
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
