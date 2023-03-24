@@ -30,3 +30,4 @@ jobs:
         server-dir: /wwwroot/apidev/
         local-dir: ./Pizzaria_back/Pizzaria_back/bin/Development/net6.0/publish/
         protocol: ftp 
+        dangerous-clean-slate: true
