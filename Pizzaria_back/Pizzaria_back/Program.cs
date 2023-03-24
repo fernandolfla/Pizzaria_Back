@@ -39,6 +39,8 @@ builder.Services.AdicionarDependenciasPizzaria(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
 //if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -53,8 +55,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 app.MapControllers();
 

@@ -21,22 +21,22 @@ namespace Pizzaria_back.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            //try
-            //{
+            try
+            {
                 await next(context);
-            //}
-            //catch (Exception ex)
-            //{
-            //    await HandleExceptionAsync(context, ex);
-            //}
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
         }
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            var code = HttpStatusCode.InternalServerError; 
+            var code = HttpStatusCode.InternalServerError;
 
             if (exception is BussinessException) code = HttpStatusCode.BadRequest;
-            else if(exception is UnauthorizedAccessException) code = HttpStatusCode.Unauthorized;
+            else if (exception is UnauthorizedAccessException) code = HttpStatusCode.Unauthorized;
 
             var result = code == HttpStatusCode.InternalServerError ?
                 JsonConvert.SerializeObject(new { error = exception.Message, stacktrace = exception.StackTrace, innerException = exception.InnerException }) :
@@ -46,5 +46,5 @@ namespace Pizzaria_back.Middlewares
             return context.Response.WriteAsync(result);
         }
     }
-    
+
 }
