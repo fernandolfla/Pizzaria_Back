@@ -35,6 +35,16 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 builder.Services.AdicionarDependenciasPizzaria(builder.Configuration);
 
 var app = builder.Build();
@@ -49,6 +59,8 @@ app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 var options = new RewriteOptions().AddIISUrlRewrite(app.Environment.ContentRootFileProvider, "UrlRewrite.xml");
 app.UseRewriter(options);
+
+app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection(); 
 
