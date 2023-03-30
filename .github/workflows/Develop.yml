@@ -13,6 +13,12 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+    - name: edit connection string
+      uses: benday-inc/edit-dbconnstr-in-appsettings@main
+      with:
+        pathtosettingsfile: './Pizzaria_back/Pizzaria_back/appsettings.json'
+        name: "DB_MySQL"
+        connectionstring: ${{ secrets.BANCO }}
     - name: Restore dependencies
       run: dotnet restore ./Pizzaria_back/Pizzaria_back.sln
     - name: Build
