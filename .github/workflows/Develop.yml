@@ -18,7 +18,7 @@ jobs:
       with:
         pathtosettingsfile: './Pizzaria_back/Pizzaria_back/appsettings.json'
         name: "DB_MySQL"
-        connectionstring: "Host=mysql5.hostingzone.com.br;Database=real10;Username=real10;Password=P@ssword1"
+        connectionstring: ${{ secrets.BANCO }}
     - name: Restore dependencies
       run: dotnet restore ./Pizzaria_back/Pizzaria_back.sln
     - name: Build
