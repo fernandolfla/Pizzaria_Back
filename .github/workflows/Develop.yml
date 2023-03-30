@@ -1,7 +1,7 @@
 on: 
   push: 
     branches:
-     - Develop
+     - bugfix/removecs
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -13,6 +13,12 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+    - name: edit connection string
+      uses: benday-inc/edit-dbconnstr-in-appsettings@main
+      with:
+        pathtosettingsfile: './Pizzaria_back/Pizzaria_back/appsettings.json'
+        name: "DB_MySQL"
+        connectionstring: "Host=mysql5.hostingzone.com.br;Database=real10;Username=real10;Password=P@ssword1"
     - name: Restore dependencies
       run: dotnet restore ./Pizzaria_back/Pizzaria_back.sln
     - name: Build
