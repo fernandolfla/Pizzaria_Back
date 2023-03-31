@@ -18,6 +18,8 @@ namespace Pizzaria_back.Repository
         public DbSet<Sabor> Sabores { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente_Contato> Clinte_Contatos { get; set; }
+        public DbSet<Cliente_Endereco> Cliente_Enderecos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

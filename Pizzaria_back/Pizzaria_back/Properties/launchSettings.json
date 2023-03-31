@@ -10,31 +10,33 @@
   },
   "profiles": {
     "Local": {
-      "commandName": "Project",
-      "launchUrl": "swagger",
-      "hotReloadProfile": "aspnetcore",
       "applicationUrl": "https://localhost:5000",
+      "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Local"
-      }
+      },
+      "hotReloadProfile": "aspnetcore",
+      "launchBrowser": true,
+      "launchUrl": "swagger"
     },
     "Development": {
-      "commandName": "Project",
-      "launchUrl": "swagger",
-      "hotReloadProfile": "aspnetcore",
       "applicationUrl": "https://localhost:5000",
+      "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "hotReloadProfile": "aspnetcore",
+      "launchBrowser": true,
+      "launchUrl": "swagger"
     },
     "Production": {
-      "commandName": "Project",
-      "launchUrl": "swagger",
-      "hotReloadProfile": "aspnetcore",
       "applicationUrl": "https://localhost:5000",
+      "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
-      }
+      },
+      "hotReloadProfile": "aspnetcore",
+      "launchUrl": "swagger"
     }
   }
 }

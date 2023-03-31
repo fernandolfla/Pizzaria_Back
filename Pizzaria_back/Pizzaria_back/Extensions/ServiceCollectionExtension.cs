@@ -67,6 +67,8 @@ namespace Pizzaria_back.Extensions
         private static void AdicionarMySQL(this IServiceCollection services, IConfiguration configuration)
         {
             string? mySqlConnection = configuration.GetConnectionString("DB_MySQL");  //Endereço do banco de dados
+            if (mySqlConnection == "" || mySqlConnection.IsNullOrEmpty())
+                mySqlConnection = Environment.GetEnvironmentVariable("DB_MySQL");
             services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.Parse("5.5.20")));
         }
 

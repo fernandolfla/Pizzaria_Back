@@ -14,50 +14,29 @@ namespace Pizzaria_back.Service
             _clienteRepository = clienteRepository; 
         }
 
-        public void Inserir(Cliente cliente)
-        {
-            if(CheckCliente(cliente))
-                _clienteRepository.Inserir(cliente);
-        }
-        public void Atualizar(Cliente cliente)
-        {
-            if (CheckCliente(cliente) && ClienteExists(cliente.Id))
-                _clienteRepository.Atualizar(cliente);
-        }
-        public List<Cliente> Buscar()
-          =>  _clienteRepository.Buscar();
+        //public void Inserir(Cliente cliente)
+        //{
+        //    if (CheckCliente(cliente))
+        //        _clienteRepository.Inserir(cliente);
+        //}
 
-        public Cliente Buscar(int id) {
-           if(ClienteExists(id)) return _clienteRepository.Buscar(id);
-           else return null; 
-        } 
+        //public List<Cliente> Buscar()
+        //  => _clienteRepository.Buscar();
 
-        public Cliente Buscar(string email)
-        => _clienteRepository.Buscar(email);
+        //public Cliente Buscar(string email)
+        //=> _clienteRepository.Buscar(email);
 
-        public void Deletar(int id)
-        {
-            if(ClienteExists(id)) _clienteRepository.Deletar(id);
-        } 
+        //private bool CheckCliente(Cliente cliente)
+        //{
+        //    ClientValidator validations = new ClientValidator(_clienteRepository);
+        //    var validationResult = validations.Validate(cliente);
+        //    if (!validationResult.IsValid)
+        //    {
+        //        var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
+        //        throw new BussinessException(errors);
+        //    }
 
-        private bool CheckCliente(Cliente cliente)
-        {
-            ClientValidator validations = new ClientValidator(_clienteRepository);
-            var validationResult = validations.Validate(cliente);
-            if (!validationResult.IsValid)
-            {
-                var errors = string.Join(";", validationResult.Errors.Select(x => x.ErrorMessage));
-                throw new BussinessException(errors);
-            }
-
-            return true;
-        }
-
-        private bool ClienteExists(int id) 
-        {
-            var cliente = _clienteRepository.Buscar(id);
-            if (cliente != null) return true;
-            throw new BussinessException("Cliente não Existe");
-        }
+        //    return true;
+        //}
     }
 }
