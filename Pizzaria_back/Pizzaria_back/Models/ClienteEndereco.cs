@@ -1,6 +1,6 @@
 ﻿namespace Pizzaria_back.Models
 {
-    public class Cliente_Endereco : DbEntity
+    public class ClienteEndereco : DbEntity
     {
         public string Label { get; set; } = string.Empty;
         public string Cep { get; set; } = string.Empty;
